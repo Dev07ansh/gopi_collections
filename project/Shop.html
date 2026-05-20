@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gopi Collections</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+       <header>
+        <!-- navbar -->
+        <div class="navbar">
+            <div class="nav-logo">
+                <img src="./images/Gopi_Collection-removebg-preview.png" alt="Gopi Collection Logo" class="header-logo">
+            </div>
+
+            <div class="nav-home border">
+                <a href="index.html (2).html">Home</a>
+            </div>
+
+            <ul class="nav-menu border">
+                <li class="nav-item dropdown">
+                <a href="#" class="nav-link">Men ▾</a>
+
+                     <!-- mens Dropdown -->
+                    <div class="dropdown-content">
+                        <div class="mens-dropdown">
+                            <h4 class="dropdown-section-1">Topwear</h4>
+                            <a href="#">T-Shirts</a>
+                            <a href="#">Casual Shirts</a>
+                            <a href="#">Formal Shirts</a>
+                            <a href="#">Sweatshirts</a>
+                            <a href="#">Sweaters</a>
+                            <a href="#">Sports T-shirts</a>
+                            <a href="#">Jackets</a>
+                            <a href="#">Rain Coats</a>
+                        </div>
+
+                        <div class="mens-dropdown">
+                            <h4 class="dropdown-section-1">Bottomwear</h4>
+                            <a href="#">Jeans</a>
+                            <a href="#">Trousers</a>
+                            <a href="#">Shorts</a>
+                            <a href="#">Lowers</a>
+                            <a href="#">Track pants & Joggers</a>
+                        </div>
+
+                        <div class="mens-dropdown">
+                            <h4 class="dropdown-section-1">India and Festival wear</h4>
+                            <a href="#">Kurta-Pajama</a>
+                            <a href="#">Dhoti</a>
+                            <a href="#">Caps</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="nav-menu border">
+                <li class="nav-item dropdown">
+                <a href="#" class="nav-link">Women ▾</a>
+
+                     <!-- womens Dropdown -->
+                    <div class="dropdown-content">
+                        <div class="womens-dropdown">
+                            <h4 class="dropdown-section-2">Sarees</h4>
+                            <a href="#">T-Shirts</a>
+                            <a href="#">Casual Shirts</a>
+                            <a href="#">Formal Shirts</a>
+                        </div>
+
+                        <div class="womens-dropdown">
+                            <h4 class="dropdown-section-2">Bottomwear</h4>
+                            <a href="#">Jeans</a>
+                            <a href="#">Trousers</a>
+                            <a href="#">Shorts</a>
+                        </div>
+
+                        <div class="womens-dropdown">
+                            <h4 class="dropdown-section-2">Accessories</h4>
+                            <a href="#">Watches</a>
+                            <a href="#">Belts</a>
+                            <a href="#">Caps</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="nav-menu border">
+                <li class="nav-item dropdown">
+                <a href="#" class="nav-link">Kids ▾</a>
+
+                     <!-- Kids Dropdown -->
+                    <div class="dropdown-content">
+                        <div class="kids-dropdown">
+                            <h4 class="dropdown-section-3">Topwear</h4>
+                            <a href="#">T-Shirts</a>
+                            <a href="#">Casual Shirts</a>
+                            <a href="#">Formal Shirts</a>
+                        </div>
+
+                        <div class="kids-dropdown">
+                            <h4 class="dropdown-section-3">Bottomwear</h4>
+                            <a href="#">Jeans</a>
+                            <a href="#">Trousers</a>
+                            <a href="#">Shorts</a>
+                        </div>
+
+                        <div class="kids-dropdown">
+                            <h4 class="dropdown-section-3">Accessories</h4>
+                            <a href="#">Watches</a>
+                            <a href="#">Belts</a>
+                            <a href="#">Caps</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="nav-contact border">
+                <a href="Contact.html">Contact Us</a>
+            </div>
+
+            <div class="nav-search border">
+                <input placeholder=" Search for products.." class="search-input">
+                <div class="search-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    
+    <div class="topbar">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="index.html (2).html">Home</a>
+      <span class="arrow">•</span>
+      <span class="current">Men</span>
+    </div>
+
+    <!-- Title + count + sort -->
+    <div class="header-row">
+      <div class="title-block">
+        <h1>T-Shirts</h1>
+        <span class="count"> items</span>
+      </div>
+    </div>
+
+    </div>
+    
+<!-- SIDEBAR + SHOP GRID -->
+<div class="shop-content">
+<div class="sidebar">
+
+      <div class="sidebar__header">
+           <span class="sidebar__title">Filter</span>
+      </div>
+ 
+  <div class="sidebar__body">
+ 
+    <!-- Sort By -->
+    <div class="filter-item" id="item-sort">
+      <div class="filter-toggle" onclick="toggleFilter('sort')">
+        <span class="filter-toggle-label">Sort By</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="filter-panel" id="panel-sort">
+        <div class="filter-panel-inner">
+          <div class="sort-option active" onclick="selectSort(this)">
+            <div class="sort-radio"></div> Recommended
+          </div>
+          <div class="sort-option" onclick="selectSort(this)">
+            <div class="sort-radio"></div> Newest First
+          </div>
+          <div class="sort-option" onclick="selectSort(this)">
+            <div class="sort-radio"></div> Price: Low to High
+          </div>
+          <div class="sort-option" onclick="selectSort(this)">
+            <div class="sort-radio"></div> Price: High to Low
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Colour -->
+    <div class="filter-item" id="item-colour">
+      <div class="filter-toggle" onclick="toggleFilter('colour')">
+        <span class="filter-toggle-label">Colour</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="filter-panel" id="panel-colour">
+        <div class="filter-panel-inner">
+          <div class="colour-grid">
+            <div class="colour-swatch" data-color="white" style="background:#fff" title="White" onclick="toggleSwatch(this)"></div>
+            <div class="colour-swatch" style="background:#222" title="Black" onclick="toggleSwatch(this)"></div>
+            <div class="colour-swatch" style="background:#5a6e8c" title="Navy" onclick="toggleSwatch(this)"></div>
+            <div class="colour-swatch" style="background:#8c3a2f" title="Red" onclick="toggleSwatch(this)"></div>
+            <div class="colour-swatch" style="background:#4a7c59" title="Green" onclick="toggleSwatch(this)"></div>
+            <div class="colour-swatch" style="background:#b8860b" title="Mustard" onclick="toggleSwatch(this)"></div>
+            <div class="colour-swatch" style="background:#7a6e65" title="Taupe" onclick="toggleSwatch(this)"></div>
+            <div class="colour-swatch" style="background:#c0b8b0" title="Beige" onclick="toggleSwatch(this)"></div>
+            <div class="colour-swatch" style="background:#4a6fa5" title="Blue" onclick="toggleSwatch(this)"></div>
+            <div class="colour-swatch" style="background:#8b7faa" title="Purple" onclick="toggleSwatch(this)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Size -->
+    <div class="filter-item" id="item-size">
+      <div class="filter-toggle" onclick="toggleFilter('size')">
+        <span class="filter-toggle-label">Size</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="filter-panel" id="panel-size">
+        <div class="filter-panel-inner">
+          <div class="size-grid">
+            <button class="size-chip" onclick="toggleChip(this)">XS</button>
+            <button class="size-chip" onclick="toggleChip(this)">S</button>
+            <button class="size-chip active" onclick="toggleChip(this)">M</button>
+            <button class="size-chip" onclick="toggleChip(this)">L</button>
+            <button class="size-chip" onclick="toggleChip(this)">XL</button>
+            <button class="size-chip" onclick="toggleChip(this)">XXL</button>
+            <button class="size-chip" onclick="toggleChip(this)">3XL</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Fit -->
+    <div class="filter-item" id="item-fit">
+      <div class="filter-toggle" onclick="toggleFilter('fit')">
+        <span class="filter-toggle-label">Fit</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="filter-panel" id="panel-fit">
+        <div class="filter-panel-inner">
+          <label class="filter-option"><input type="checkbox" /> Regular Fit</label>
+          <label class="filter-option"><input type="checkbox" checked /> Slim Fit</label>
+          <label class="filter-option"><input type="checkbox" /> Loose Fit</label>
+          <label class="filter-option"><input type="checkbox" /> Relaxed Fit</label>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Sleeve Length -->
+    <div class="filter-item" id="item-sleeve">
+      <div class="filter-toggle" onclick="toggleFilter('sleeve')">
+        <span class="filter-toggle-label">Sleeve Length</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="filter-panel" id="panel-sleeve">
+        <div class="filter-panel-inner">
+          <label class="filter-option"><input type="checkbox" /> Sleeveless</label>
+          <label class="filter-option"><input type="checkbox" checked /> Short Sleeve</label>
+          <label class="filter-option"><input type="checkbox" /> Long Sleeve</label>
+          <label class="filter-option"><input type="checkbox" /> 3/4 Sleeve</label>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Material -->
+    <div class="filter-item" id="item-material">
+      <div class="filter-toggle" onclick="toggleFilter('material')">
+        <span class="filter-toggle-label">Material</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="filter-panel" id="panel-material">
+        <div class="filter-panel-inner">
+          <label class="filter-option"><input type="checkbox" checked /> Cotton</label>
+          <label class="filter-option"><input type="checkbox" /> Polyester</label>
+          <label class="filter-option"><input type="checkbox" /> Linen</label>
+          <label class="filter-option"><input type="checkbox" /> Jersey</label>
+          <label class="filter-option"><input type="checkbox" /> Viscose</label>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Quality -->
+    <div class="filter-item" id="item-quality">
+      <div class="filter-toggle" onclick="toggleFilter('quality')">
+        <span class="filter-toggle-label">Quality</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="filter-panel" id="panel-quality">
+        <div class="filter-panel-inner">
+          <label class="filter-option"><input type="checkbox" /> Basic</label>
+          <label class="filter-option"><input type="checkbox" checked /> Premium</label>
+          <label class="filter-option"><input type="checkbox" /> Organic</label>
+          <label class="filter-option"><input type="checkbox" /> Sustainable</label>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Neckline -->
+    <div class="filter-item" id="item-neckline">
+      <div class="filter-toggle" onclick="toggleFilter('neckline')">
+        <span class="filter-toggle-label">Neckline</span>
+        <span class="arrow">→</span>
+      </div>
+      <div class="filter-panel" id="panel-neckline">
+        <div class="filter-panel-inner">
+          <label class="filter-option"><input type="checkbox" /> Crew Neck</label>
+          <label class="filter-option"><input type="checkbox" /> V-Neck</label>
+          <label class="filter-option"><input type="checkbox" /> Polo</label>
+          <label class="filter-option"><input type="checkbox" /> Henley</label>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+
+<!-- Product Grid -->
+<div class="shop-grid" id="shopGrid"></div>
+
+</div>    
+ 
+    <!-- Footer -->
+
+    <footer>
+        <div class="foot-panel1">
+            <a href="#">Back to Top</a>
+        </div>
+
+        <div class="container">
+            <div class="foot-panel2">
+                <div class="foot-subpanel1">
+                    <img src="./images/Gopi_Collection-removebg-preview.png" alt="Gopi Collection Logo" class="footer-logo">
+                    <div class="foot-descrp">
+                     <b>Gopi Collection: </b>a stylish apparel store in Bhopal, Madhya Pradesh, offering trendy and comfortable clothing for all occasions and all genders. We focus on quality fabrics, modern designs, and affordable prices to help you look and feel your best.
+                    </div>
+                    <div class="foot-socialmedia">
+                        <a href="#">
+                        <i class="fa-brands fa-instagram"></i></a>
+                        <a href="#">
+                        <i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <ul class="foot-subpanel2">
+                        <h3>My Accounts</h3>
+                        <a href="#">Track Orders</a>
+                        <a href="#">Shipping</a>
+                        <a href="#">My Account</a>
+                        <a href="#">Order History</a>
+                        <a href="#">Returns</a>
+                </ul>
+
+                <ul class="foot-subpanel2">
+                        <h3>Information</h3>
+                        <a href="#">Our Story</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Latest News</a>
+                        <a href="#">Contact Us</a>
+                </ul>
+
+                <div class="foot-subpanel4">
+                    <h3>Talk To Us</h3>
+                    <div class="foot-widget-content">
+                        <div class="foot-contact">
+                            <span>Got Questions? Call us</span>
+                            <h3>9827255599 & 9406882504</h3>
+                        </div>
+                        <div class="foot-email">
+                            <i class="fa-regular fa-envelope"></i>
+                            <a>gopi.collection2018@gmail.com</a>
+                        </div>
+                        <div class="foot-location">
+                            <i class="fa-solid fa-map-pin"></i>
+                            <a>108, near to Aims Hospital, Sector- 9/A Saket Nagar, Habib Ganj, Bhopal, Madhya Pradesh 462024</a>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </footer>
+<script src="app.js"></script>
+</body>
+</html>
