@@ -46,6 +46,7 @@ if (shopContainer) {
   `).join('');
 }
 
+// Sidebar 
 
   /* ── Accordion ── */
   function toggleFilter(id) {
@@ -64,18 +65,6 @@ if (shopContainer) {
  
   /* ── Size chips ── */
   function toggleChip(el) { el.classList.toggle('active'); }
- 
-  /* ── Clear all ── */
-  function clearAll() {
-    document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
-    document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.colour-swatch').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.sort-option').forEach((o, i) => {
-      o.classList.toggle('active', i === 0);
-    });
-    minInput.value = 499; maxInput.value = 3599; updateRange();
-  }
-
  
  /* 
  * 1. Reads ?gender= and ?category= from the URL.
