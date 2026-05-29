@@ -24,10 +24,6 @@ if (cardContainer) {
 
 
 // Shop Collection Cards 
-<<<<<<< HEAD
-
-=======
->>>>>>> 9cb75a72110fe33b7b5147bca00ac5adfb1ed236
 const shopItems = [
   { img: './images/hoddies.jpg',            alt: 'Hoodies',    label: 'Hoodies',       href: 'Shop.html?gender=Men&category=Sweatshirts' },
   { img: './images/blurred-frame.png',      alt: 'Tracksuits', label: 'Tracksuits',    href: 'Shop.html?gender=Men&category=Track pants & Joggers' },
@@ -50,10 +46,7 @@ if (shopContainer) {
   `).join('');
 }
 
-<<<<<<< HEAD
 // Sidebar 
-=======
->>>>>>> 9cb75a72110fe33b7b5147bca00ac5adfb1ed236
 
   /* ── Accordion ── */
   function toggleFilter(id) {
@@ -73,22 +66,6 @@ if (shopContainer) {
   /* ── Size chips ── */
   function toggleChip(el) { el.classList.toggle('active'); }
  
-<<<<<<< HEAD
-
-=======
-  /* ── Clear all ── */
-  function clearAll() {
-    document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
-    document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.colour-swatch').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.sort-option').forEach((o, i) => {
-      o.classList.toggle('active', i === 0);
-    });
-    minInput.value = 499; maxInput.value = 3599; updateRange();
-  }
-
- 
->>>>>>> 9cb75a72110fe33b7b5147bca00ac5adfb1ed236
  /* 
  * 1. Reads ?gender= and ?category= from the URL.
  * 2. Updates the breadcrumb, page title, and sidebar filter visibility
