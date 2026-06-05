@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gopi Collections</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -12,7 +15,7 @@
         <!-- navbar -->
         <div class="navbar">
             <div class="nav-logo">
-                <img src="./images/Gopi_Collection-removebg-preview.png" alt="Gopi Collection Logo" class="header-logo">
+                <img src="./images/Gopi_Collection.png" alt="Gopi Collection Logo" class="header-logo">
             </div>
 
             <div class="nav-home border">
@@ -63,7 +66,12 @@
                      <!-- womens Dropdown -->
                     <div class="dropdown-content">
                         <div class="womens-dropdown">
-                            <h4 class="dropdown-section-2">Sarees</h4>
+                            <h4 class="dropdown-section-2">Indian Wear</h4>
+                            <a>Sarees</a>
+                            <a>Tops</a>
+                            <a>Kurta Sets</a>
+                            <a>Co-ord Sets</a>
+                            <a>Salwar Suits</a>
                             <a>T-Shirts</a>
                             <a>Casual Shirts</a>
                             <a>Formal Shirts</a>
@@ -71,6 +79,9 @@
 
                         <div class="womens-dropdown">
                             <h4 class="dropdown-section-2">Bottomwear</h4>
+                            <a>Leggings</a>
+                            <a>Skirts</a>
+                            <a>Pants</a>
                             <a>Jeans</a>
                             <a>Trousers</a>
                             <a>Shorts</a>
@@ -218,7 +229,7 @@
           <div class="size-grid">
             <button class="size-chip" onclick="toggleChip(this)">XS</button>
             <button class="size-chip" onclick="toggleChip(this)">S</button>
-            <button class="size-chip active" onclick="toggleChip(this)">M</button>
+            <button class="size-chip" onclick="toggleChip(this)">M</button>
             <button class="size-chip" onclick="toggleChip(this)">L</button>
             <button class="size-chip" onclick="toggleChip(this)">XL</button>
             <button class="size-chip" onclick="toggleChip(this)">XXL</button>
@@ -237,7 +248,7 @@
       <div class="filter-panel" id="panel-fit">
         <div class="filter-panel-inner">
           <label class="filter-option"><input type="checkbox" /> Regular Fit</label>
-          <label class="filter-option"><input type="checkbox" checked /> Slim Fit</label>
+          <label class="filter-option"><input type="checkbox" /> Slim Fit</label>
           <label class="filter-option"><input type="checkbox" /> Loose Fit</label>
           <label class="filter-option"><input type="checkbox" /> Relaxed Fit</label>
         </div>
@@ -253,7 +264,7 @@
       <div class="filter-panel" id="panel-sleeve">
         <div class="filter-panel-inner">
           <label class="filter-option"><input type="checkbox" /> Sleeveless</label>
-          <label class="filter-option"><input type="checkbox" checked /> Short Sleeve</label>
+          <label class="filter-option"><input type="checkbox" /> Short Sleeve</label>
           <label class="filter-option"><input type="checkbox" /> Long Sleeve</label>
           <label class="filter-option"><input type="checkbox" /> 3/4 Sleeve</label>
         </div>
@@ -268,7 +279,7 @@
       </div>
       <div class="filter-panel" id="panel-material">
         <div class="filter-panel-inner">
-          <label class="filter-option"><input type="checkbox" checked /> Cotton</label>
+          <label class="filter-option"><input type="checkbox" /> Cotton</label>
           <label class="filter-option"><input type="checkbox" /> Polyester</label>
           <label class="filter-option"><input type="checkbox" /> Linen</label>
           <label class="filter-option"><input type="checkbox" /> Jersey</label>
@@ -286,7 +297,7 @@
       <div class="filter-panel" id="panel-quality">
         <div class="filter-panel-inner">
           <label class="filter-option"><input type="checkbox" /> Basic</label>
-          <label class="filter-option"><input type="checkbox" checked /> Premium</label>
+          <label class="filter-option"><input type="checkbox" /> Premium</label>
           <label class="filter-option"><input type="checkbox" /> Organic</label>
           <label class="filter-option"><input type="checkbox" /> Sustainable</label>
         </div>
@@ -327,7 +338,7 @@
         <div class="container">
             <div class="foot-panel2">
                 <div class="foot-subpanel1">
-                    <img src="./images/Gopi_Collection-removebg-preview.png" alt="Gopi Collection Logo" class="footer-logo">
+                    <img src="./images/Gopi_Collection.png" alt="Gopi Collection Logo" class="footer-logo">
                     <div class="foot-descrp">
                      <b>Gopi Collection: </b>a stylish apparel store in Bhopal, Madhya Pradesh, offering trendy and comfortable clothing for all occasions and all genders. We focus on quality fabrics, modern designs, and affordable prices to help you look and feel your best.
                     </div>
@@ -338,15 +349,6 @@
                         <i class="fa-brands fa-facebook-f"></i></a>
                     </div>
                 </div>
-
-                <ul class="foot-subpanel2">
-                        <h3>My Accounts</h3>
-                        <a href="#">Track Orders</a>
-                        <a href="#">Shipping</a>
-                        <a href="#">My Account</a>
-                        <a href="#">Order History</a>
-                        <a href="#">Returns</a>
-                </ul>
 
                 <ul class="foot-subpanel2">
                         <h3>Information</h3>
@@ -366,11 +368,11 @@
                         </div>
                         <div class="foot-email">
                             <i class="fa-regular fa-envelope"></i>
-                            <a>gopi.collection2018@gmail.com</a>
+                            <a href="mailto:gopi.collection2018@gmail.com">gopi.collection2018@gmail.com</a>
                         </div>
                         <div class="foot-location">
                             <i class="fa-solid fa-map-pin"></i>
-                            <a>108, near to Aims Hospital, Sector- 9/A Saket Nagar, Habib Ganj, Bhopal, Madhya Pradesh 462024</a>
+                            <a href="https://maps.app.goo.gl/s568kFXDhxnz9Bgd7" target="_blank">108, near to Aims Hospital, Sector- 9/A Saket Nagar, Habib Ganj, Bhopal, Madhya Pradesh 462024</a>
                         </div>
                     </div>    
                 </div>
