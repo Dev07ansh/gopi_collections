@@ -3,56 +3,6 @@
 //  Handles: nav links, breadcrumb/title, product catalogue, sidebar filtering
 // ─────────────────────────────────────────────────────────────────────────────
 
-
-// ── 1. FEATURED CATEGORY CARDS (index.html hero section) ─────────────────────
-
-const featuredCards = [
-  { img: './images/hoddies.jpg',         alt: 'Hoodies',     title: 'Hoodies & Jackets',     desc: 'Warm, stylish & comfortable', href: 'Shop.html?gender=Men&category=Sweatshirts' },
-  { img: './images/blurred-frame 1.png', alt: 'Co-ords',     title: 'Co-ord Sets',           desc: 'Perfect matching outfits',    href: 'Shop.html?gender=Men&category=Co-ord Sets' },
-  { img: './images/blurred-frame.png',   alt: 'Tracksuits',  title: 'Super soft Tracksuits', desc: 'Premium Comfort & Fit',       href: 'Shop.html?gender=Men&category=Track pants & Joggers' },
-  { img: './images/travel.jpg',          alt: 'Travel Wear', title: 'Travel Essentials',     desc: 'Comfort for every journey',   href: 'Shop.html?gender=Men&category=T-Shirts' },
-];
-
-const cardContainer = document.getElementById('card-container');
-if (cardContainer) {
-  cardContainer.innerHTML = featuredCards.map(card => `
-    <div class="category-card">
-      <img src="${card.img}" alt="${card.alt}">
-      <div class="overlay">
-        <h3>${card.title}</h3>
-        <p>${card.desc}</p>
-        <a href="${card.href}">Explore Now</a>
-      </div>
-    </div>
-  `).join('');
-}
-
-
-// ── 2. SHOP COLLECTION CARDS (index.html shop section) ───────────────────────
-
-const shopItems = [
-  { img: './images/hoddies.jpg',            alt: 'Hoodies',    label: 'Hoodies',       href: 'Shop.html?gender=Men&category=Sweatshirts' },
-  { img: './images/blurred-frame.png',      alt: 'Tracksuits', label: 'Tracksuits',    href: 'Shop.html?gender=Men&category=Track pants & Joggers' },
-  { img: './images/jeans.png',              alt: 'Jeans',      label: 'Jeans',         href: 'Shop.html?gender=Men&category=Jeans' },
-  { img: './images/casual-tshirt-men.webp', alt: 'Shirts',     label: 'Casual Shirts', href: 'Shop.html?gender=Men&category=Casual Shirts' },
-  { img: './images/kurta-pajama.png',       alt: 'Kurta',      label: 'Kurta-Pajama',  href: 'Shop.html?gender=Men&category=Kurta-Pajama' },
-  { img: './images/jackets.jpg',            alt: 'Jackets',    label: 'Jackets',       href: 'Shop.html?gender=Men&category=Jackets' },
-  { img: './images/sweaters.jpg',           alt: 'Sweaters',   label: 'Sweaters',      href: 'Shop.html?gender=Men&category=Sweaters' },
-];
-
-const shopContainer = document.getElementById('shop-container');
-if (shopContainer) {
-  shopContainer.innerHTML = shopItems.map(item => `
-    <div class="shop-cards">
-      <img src="${item.img}" alt="${item.alt}">
-      <div class="underlay">
-        <a href="${item.href}">${item.label}</a>
-      </div>
-    </div>
-  `).join('');
-}
-
-
 // ── 3. NAV LINK REWRITER ─────────────────────────────────────────────────────
 // Rewrites every bare <a> in the dropdowns to Shop.html?gender=…&category=…
 
@@ -150,352 +100,6 @@ if (shopContainer) {
       } catch(e) {}
     });
 })();
-
-
-// ── 5. PRODUCT CATALOGUE ─────────────────────────────────────────────────────
-//
-//  Each product has these filterable fields:
-//    colour   — matches the `title` attribute on colour swatches  (e.g. "Black", "Navy")
-//    size     — matches size chip text                             (e.g. "M", "XL")
-//    fit      — matches checkbox label text                        (e.g. "Slim Fit")
-//    sleeve   — matches checkbox label text                        (e.g. "Short Sleeve")
-//    material — matches checkbox label text                        (e.g. "Cotton")
-//    quality  — matches checkbox label text                        (e.g. "Premium")
-//    neckline — matches checkbox label text                        (e.g. "Crew Neck")
-//
-//  A product can have multiple values per field (array).
-//  Leave a field as [] if not applicable.
-
-const products = [
-
-  // ── T-Shirts ──────────────────────────────────────────────────────────────
-  {
-    category: 'T-Shirts', name: 'Graphic Print Oversized Tee', img: './images/blurred-frame.png',
-    colour: ['Black','White'],  size: ['S','M','L','XL'],
-    fit: ['Loose Fit'],         sleeve: ['Short Sleeve'],
-    material: ['Cotton'],       quality: ['Basic'],      neckline: ['Crew Neck'],
-  },
-  {
-    category: 'T-Shirts', name: 'Plain Classic Fit T-Shirt', img: './images/tshirt-men.png',
-    colour: ['White'], size: ['XS','S','M','L','XL','XXL'],
-    fit: ['Regular Fit'],             sleeve: ['Short Sleeve'],
-    material: ['Cotton'],             quality: ['Premium'],  neckline: ['Crew Neck'],
-  },
-  {
-    category: 'T-Shirts', name: 'Acid Wash Drop Shoulder Tee', img: './images/tshirt-men-1.png',
-    colour: ['Taupe','Beige'],  size: ['S','M','L'],
-    fit: ['Loose Fit'],         sleeve: ['Short Sleeve'],
-    material: ['Cotton'],       quality: ['Basic'],      neckline: ['Crew Neck'],
-  },
-  {
-    category: 'T-Shirts', name: 'Polo Collar Cotton T-Shirt', img: './images/tshirt-men-2.png',
-    colour: ['White'], size: ['S','M','L','XL','XXL'],
-    fit: ['Regular Fit'],             sleeve: ['Short Sleeve'],
-    material: ['Cotton'],             quality: ['Premium'],  neckline: ['Polo'],
-  },
-  {
-    category: 'T-Shirts', name: 'Striped Casual T-Shirt', img: './images/tshirt-men-3.png',
-    colour: ['Navy','Red','White'],  size: ['XS','S','M','L','XL'],
-    fit: ['Regular Fit'],            sleeve: ['Short Sleeve'],
-    material: ['Cotton'],            quality: ['Basic'],      neckline: ['Crew Neck'],
-  },
-  {
-    category: 'T-Shirts', name: 'Solid Crew Neck Everyday Tee', img: './images/tshirt-men-4.png',
-    colour: ['Black','White','Navy','Green','Mustard','Red'], size: ['XS','S','M','L','XL','XXL','3XL'],
-    fit: ['Regular Fit'],                                     sleeve: ['Short Sleeve'],
-    material: ['Cotton'],                                     quality: ['Basic'],       neckline: ['Crew Neck'],
-  },
-  {
-    category: 'T-Shirts', name: 'Printed Streetwear Tee', img: './images/tshirt-men-5.png',
-    colour: ['Black','White'],  size: ['S','M','L','XL'],
-    fit: ['Loose Fit'],         sleeve: ['Short Sleeve'],
-    material: ['Cotton'],       quality: ['Basic'],      neckline: ['Crew Neck'],
-  },
-  {
-    category: 'T-Shirts', name: 'V-Neck Essential T-Shirt', img: './images/tshirt-men-6.png',
-    colour: ['White','Black','Navy'], size: ['S','M','L','XL','XXL'],
-    fit: ['Slim Fit'],                sleeve: ['Short Sleeve'],
-    material: ['Cotton'],             quality: ['Premium'],  neckline: ['V-Neck'],
-  },
-  {
-    category: 'T-Shirts', name: 'Henley Cotton T-Shirt', img: '',
-    colour: ['Taupe','Black','Navy'], size: ['S','M','L','XL'],
-    fit: ['Regular Fit'],             sleeve: ['Long Sleeve'],
-    material: ['Cotton'],             quality: ['Premium'],  neckline: ['Henley'],
-  },
-  {
-    category: 'T-Shirts', name: 'Sleeveless Vest Tee', img: '',
-    colour: ['White','Black','Navy'], size: ['S','M','L','XL','XXL'],
-    fit: ['Regular Fit'],             sleeve: ['Sleeveless'],
-    material: ['Jersey'],             quality: ['Basic'],    neckline: ['Crew Neck'],
-  },
-  {
-    category: 'T-Shirts', name: 'Linen Blend T-Shirt', img: '',
-    colour: ['Beige','White','Taupe'], size: ['S','M','L','XL'],
-    fit: ['Regular Fit'],              sleeve: ['Short Sleeve'],
-    material: ['Linen'],               quality: ['Premium'],  neckline: ['V-Neck'],
-  },
-  {
-    category: 'T-Shirts', name: '3/4 Sleeve Casual Tee', img: '',
-    colour: ['Navy','Black','Green'],  size: ['S','M','L','XL'],
-    fit: ['Regular Fit'],              sleeve: ['3/4 Sleeve'],
-    material: ['Cotton'],              quality: ['Basic'],    neckline: ['Crew Neck'],
-  },
-
-  // ── Casual Shirts ──────────────────────────────────────────────────────────
-  {
-    category: 'Casual Shirts', name: 'Classic Oxford Shirt', img: '',
-    colour: ['White','Blue','Navy'],  size: ['S','M','L','XL','XXL'],
-    fit: ['Regular Fit'],             sleeve: ['Long Sleeve'],
-    material: ['Cotton'],             quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Casual Shirts', name: 'Linen Casual Shirt', img: '',
-    colour: ['Beige','White','Taupe'], size: ['S','M','L','XL'],
-    fit: ['Loose Fit'],                sleeve: ['Short Sleeve'],
-    material: ['Linen'],               quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Casual Shirts', name: 'Printed Camp Shirt', img: '',
-    colour: ['Mustard','Red','Green'], size: ['S','M','L','XL'],
-    fit: ['Loose Fit'],                sleeve: ['Short Sleeve'],
-    material: ['Viscose'],             quality: ['Basic'],    neckline: [],
-  },
-
-  // ── Formal Shirts ──────────────────────────────────────────────────────────
-  {
-    category: 'Formal Shirts', name: 'White Formal Shirt', img: '',
-    colour: ['White'],         size: ['S','M','L','XL','XXL'],
-    fit: ['Slim Fit'],         sleeve: ['Long Sleeve'],
-    material: ['Cotton'],      quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Formal Shirts', name: 'Slim Fit Formal Shirt', img: '',
-    colour: ['White','Navy','Black'], size: ['S','M','L','XL'],
-    fit: ['Slim Fit'],                sleeve: ['Long Sleeve'],
-    material: ['Cotton'],             quality: ['Premium'],  neckline: [],
-  },
-
-  // ── Sweatshirts ────────────────────────────────────────────────────────────
-  {
-    category: 'Sweatshirts', name: 'Solid Crew Sweatshirt', img: './images/hoddies.jpg',
-    colour: ['Black','Navy','Green','Mustard'], size: ['S','M','L','XL','XXL'],
-    fit: ['Regular Fit'],                       sleeve: ['Long Sleeve'],
-    material: ['Cotton'],                       quality: ['Premium'],  neckline: ['Crew Neck'],
-  },
-  {
-    category: 'Sweatshirts', name: 'Graphic Sweatshirt', img: '',
-    colour: ['Black','White'],  size: ['S','M','L','XL'],
-    fit: ['Loose Fit'],         sleeve: ['Long Sleeve'],
-    material: ['Cotton'],       quality: ['Basic'],    neckline: ['Crew Neck'],
-  },
-  {
-    category: 'Sweatshirts', name: 'Zip-Up Hoodie', img: '',
-    colour: ['Black','Navy','Red'], size: ['S','M','L','XL','XXL'],
-    fit: ['Regular Fit'],           sleeve: ['Long Sleeve'],
-    material: ['Cotton'],           quality: ['Premium'],  neckline: [],
-  },
-
-  // ── Sweaters ───────────────────────────────────────────────────────────────
-  {
-    category: 'Sweaters', name: 'Knit Pullover Sweater', img: './images/sweaters.jpg',
-    colour: ['Navy','Beige','Black'], size: ['S','M','L','XL'],
-    fit: ['Regular Fit'],             sleeve: ['Long Sleeve'],
-    material: ['Cotton'],             quality: ['Premium'],  neckline: ['Crew Neck'],
-  },
-  {
-    category: 'Sweaters', name: 'Cable Knit Sweater', img: '',
-    colour: ['Beige','White','Taupe'], size: ['S','M','L','XL'],
-    fit: ['Loose Fit'],                sleeve: ['Long Sleeve'],
-    material: ['Cotton'],              quality: ['Premium'],  neckline: ['Crew Neck'],
-  },
-
-  // ── Sports T-shirts ────────────────────────────────────────────────────────
-  {
-    category: 'Sports T-shirts', name: 'Dry Fit Sports Tee', img: '',
-    colour: ['Black','Red','Navy','White'], size: ['S','M','L','XL','XXL'],
-    fit: ['Slim Fit'],                      sleeve: ['Short Sleeve'],
-    material: ['Polyester'],                quality: ['Basic'],    neckline: ['Crew Neck'],
-  },
-  {
-    category: 'Sports T-shirts', name: 'Compression T-Shirt', img: '',
-    colour: ['Black','Navy'],   size: ['S','M','L','XL'],
-    fit: ['Slim Fit'],          sleeve: ['Short Sleeve'],
-    material: ['Polyester'],    quality: ['Premium'],  neckline: ['Crew Neck'],
-  },
-
-  // ── Jackets ────────────────────────────────────────────────────────────────
-  {
-    category: 'Jackets', name: 'Bomber Jacket', img: './images/jackets.jpg',
-    colour: ['Black','Navy','Green'], size: ['S','M','L','XL','XXL'],
-    fit: ['Regular Fit'],             sleeve: ['Long Sleeve'],
-    material: ['Polyester'],          quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Jackets', name: 'Denim Jacket', img: '',
-    colour: ['Navy','Black'],   size: ['S','M','L','XL'],
-    fit: ['Regular Fit'],       sleeve: ['Long Sleeve'],
-    material: ['Cotton'],       quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Jackets', name: 'Windbreaker', img: '',
-    colour: ['Black','Red','Navy'], size: ['S','M','L','XL','XXL'],
-    fit: ['Loose Fit'],             sleeve: ['Long Sleeve'],
-    material: ['Polyester'],        quality: ['Basic'],    neckline: [],
-  },
-
-  // ── Rain Coats ─────────────────────────────────────────────────────────────
-  {
-    category: 'Rain Coats', name: 'Waterproof Rain Coat', img: '',
-    colour: ['Black','Navy'],   size: ['S','M','L','XL'],
-    fit: ['Regular Fit'],       sleeve: ['Long Sleeve'],
-    material: ['Polyester'],    quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Rain Coats', name: 'Packable Rain Jacket', img: '',
-    colour: ['Black','Green','Navy'], size: ['S','M','L','XL','XXL'],
-    fit: ['Loose Fit'],               sleeve: ['Long Sleeve'],
-    material: ['Polyester'],          quality: ['Basic'],    neckline: [],
-  },
-
-  // ── Jeans ──────────────────────────────────────────────────────────────────
-  {
-    category: 'Jeans', name: 'Slim Fit Dark Jeans', img: './images/jeans.png',
-    colour: ['Navy','Black'],   size: ['S','M','L','XL','XXL'],
-    fit: ['Slim Fit'],          sleeve: [],
-    material: ['Cotton'],       quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Jeans', name: 'Relaxed Fit Jeans', img: '',
-    colour: ['Navy','Taupe'],   size: ['M','L','XL','XXL','3XL'],
-    fit: ['Relaxed Fit'],       sleeve: [],
-    material: ['Cotton'],       quality: ['Basic'],    neckline: [],
-  },
-  {
-    category: 'Jeans', name: 'Straight Cut Jeans', img: '',
-    colour: ['Black','Navy'],   size: ['S','M','L','XL'],
-    fit: ['Regular Fit'],       sleeve: [],
-    material: ['Cotton'],       quality: ['Premium'],  neckline: [],
-  },
-
-  // ── Trousers ───────────────────────────────────────────────────────────────
-  {
-    category: 'Trousers', name: 'Formal Slim Trousers', img: '',
-    colour: ['Black','Navy','Taupe'], size: ['S','M','L','XL'],
-    fit: ['Slim Fit'],                sleeve: [],
-    material: ['Polyester'],          quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Trousers', name: 'Chino Trousers', img: '',
-    colour: ['Beige','Navy','Taupe'], size: ['S','M','L','XL','XXL'],
-    fit: ['Regular Fit'],             sleeve: [],
-    material: ['Cotton'],             quality: ['Premium'],  neckline: [],
-  },
-
-  // ── Shorts ─────────────────────────────────────────────────────────────────
-  {
-    category: 'Shorts', name: 'Cargo Shorts', img: '',
-    colour: ['Black','Taupe','Navy'], size: ['S','M','L','XL'],
-    fit: ['Regular Fit'],             sleeve: [],
-    material: ['Cotton'],             quality: ['Basic'],    neckline: [],
-  },
-  {
-    category: 'Shorts', name: 'Casual Cotton Shorts', img: '',
-    colour: ['White','Navy','Black'], size: ['S','M','L','XL','XXL'],
-    fit: ['Loose Fit'],               sleeve: [],
-    material: ['Cotton'],             quality: ['Basic'],    neckline: [],
-  },
-
-  // ── Lowers ─────────────────────────────────────────────────────────────────
-  {
-    category: 'Lowers', name: 'Pyjama Lowers', img: '',
-    colour: ['Navy','Black','White'], size: ['S','M','L','XL','XXL'],
-    fit: ['Loose Fit'],               sleeve: [],
-    material: ['Cotton'],             quality: ['Basic'],    neckline: [],
-  },
-  {
-    category: 'Lowers', name: 'Lounge Pants', img: '',
-    colour: ['Black','Grey','Navy'],  size: ['S','M','L','XL','XXL'],
-    fit: ['Relaxed Fit'],             sleeve: [],
-    material: ['Cotton'],             quality: ['Basic'],    neckline: [],
-  },
-
-  // ── Track pants & Joggers ──────────────────────────────────────────────────
-  {
-    category: 'Track pants & Joggers', name: 'Slim Fit Joggers', img: './images/blurred-frame.png',
-    colour: ['Black','Navy','Green'],   size: ['S','M','L','XL','XXL'],
-    fit: ['Slim Fit'],                  sleeve: [],
-    material: ['Cotton'],               quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Track pants & Joggers', name: 'Track Pants', img: '',
-    colour: ['Black','Navy','Red'],     size: ['M','L','XL','XXL'],
-    fit: ['Regular Fit'],               sleeve: [],
-    material: ['Polyester'],            quality: ['Basic'],    neckline: [],
-  },
-  {
-    category: 'Track pants & Joggers', name: 'Terry Joggers', img: '',
-    colour: ['Black','Beige'],          size: ['S','M','L','XL'],
-    fit: ['Relaxed Fit'],               sleeve: [],
-    material: ['Cotton'],               quality: ['Premium'],  neckline: [],
-  },
-
-  // ── Kurta-Pajama ───────────────────────────────────────────────────────────
-  {
-    category: 'Kurta-Pajama', name: 'Cotton Kurta Set', img: './images/kurta-pajama.png',
-    colour: ['White','Beige','Navy'],  size: ['S','M','L','XL','XXL'],
-    fit: ['Regular Fit'],              sleeve: [],
-    material: ['Cotton'],              quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Kurta-Pajama', name: 'Printed Kurta Pajama', img: '',
-    colour: ['Mustard','Red','Green'], size: ['S','M','L','XL'],
-    fit: ['Loose Fit'],                sleeve: [],
-    material: ['Cotton'],              quality: ['Basic'],    neckline: [],
-  },
-
-  // ── Dhoti ──────────────────────────────────────────────────────────────────
-  {
-    category: 'Dhoti', name: 'Traditional Cotton Dhoti', img: '',
-    colour: ['White','Beige'],  size: ['M','L','XL'],
-    fit: [],                    sleeve: [],
-    material: ['Cotton'],       quality: ['Premium'],  neckline: [],
-  },
-
-  // ── Caps ───────────────────────────────────────────────────────────────────
-  {
-    category: 'Caps', name: 'Baseball Cap', img: '',
-    colour: ['Black','Navy','Red'], size: [],
-    fit: [],                        sleeve: [],
-    material: ['Cotton'],           quality: ['Basic'],    neckline: [],
-  },
-  {
-    category: 'Caps', name: 'Snapback Cap', img: '',
-    colour: ['Black','White'],  size: [],
-    fit: [],                    sleeve: [],
-    material: ['Cotton'],       quality: ['Basic'],    neckline: [],
-  },
-
-  // ── Co-ord Sets ────────────────────────────────────────────────────────────
-  {
-    category: 'Co-ord Sets', name: 'Casual Co-ord Set', img: './images/co-ord_set.jpg',
-    colour: ['Navy','Black'],   size: ['S','M','L','XL'],
-    fit: ['Regular Fit'],       sleeve: ['Short Sleeve'],
-    material: ['Cotton'],       quality: ['Basic'],    neckline: [],
-  },
-  {
-    category: 'Co-ord Sets', name: 'Formal Co-ord Set', img: './images/co-ord_set_1.jpg',
-    colour: ['Black','White'],  size: ['S','M','L','XL','XXL'],
-    fit: ['Slim Fit'],          sleeve: ['Short Sleeve'],
-    material: ['Polyester'],    quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Co-ord Sets', name: 'Printed Co-ord Set', img: './images/co-ord_set_2.jpg',
-    colour: ['Mustard','Red'],  size: ['S','M','L','XL'],
-    fit: ['Loose Fit'],         sleeve: ['Short Sleeve'],
-    material: ['Viscose'],      quality: ['Basic'],    neckline: [],
-  },
-];
 
 
 // ── 6. SIDEBAR INTERACTIVE HELPERS ───────────────────────────────────────────
@@ -611,27 +215,166 @@ function applyFilters() {
         <button onclick="clearAll()" style="margin-top:12px;padding:8px 20px;cursor:pointer;">Clear Filters</button>
       </div>`;
   } else {
-    grid.innerHTML = filtered.map(p => `
-      <div class="p-card">
-        <div class="p-img">
-          ${p.img ? `<img src="${p.img}" alt="${p.name}">` : ''}
-        </div>
-        <div class="p-info">
-          <p class="p-name">${p.name}</p>
-        </div>
-      </div>
-    `).join('');
+    grid.innerHTML = filtered.map(p => {
+      const idx = products.indexOf(p);
+      // p.imgs is a colour→path object; p.img is a single path. Support both.
+      const thumbnail = p.imgs ? Object.values(p.imgs)[0] : (p.img || '');
+      return `
+        <div class="p-card" role="button" tabindex="0"
+             aria-label="View details for ${p.name}"
+             onclick="openModal(${idx})"
+             onkeydown="if(event.key==='Enter'||event.key===' ')openModal(${idx})">
+          <div class="p-img">
+            ${thumbnail
+              ? `<img src="${thumbnail}" alt="${p.name}"
+                      onerror="this.closest('.p-img').style.background='#e8ddd8';this.remove()">`
+              : ''}
+          </div>
+          <div class="p-info">
+            <p class="p-name">${p.name}</p>
+          </div>
+        </div>`;
+    }).join('');
   }
 }
 
 
-// ── 8. WIRE CHECKBOXES + INITIAL RENDER ──────────────────────────────────────
+// ── 8. MODAL ──────────────────────────────────────────────────────────────────
+
+const COLOUR_HEX = {
+  'White':  '#ffffff', 'Black': '#222222', 'Navy':    '#5a6e8c',
+  'Red':    '#a52a1c', 'Green': '#4a7c59', 'Mustard': '#b8860b',
+  'Taupe':  '#7a6e65', 'Beige': '#c0b8b0', 'Blue':    '#4a6fa5',
+  'Purple': '#880b5f', 'Grey':  '#9a9a9a', 'Pink':    '#db546b'
+};
+
+function openModal(productIndex) {
+  const p     = products[productIndex];
+  const modal = document.getElementById('productModal');
+  if (!p || !modal) return;
+
+  // ── Image ──
+  // For multi-colour products (p.imgs), show the first colour's image by default.
+  // Clicking a swatch will swap it via swapModalImage().
+  const imgEl   = document.getElementById('modalImg');
+  const imgWrap = document.getElementById('modalImgWrap');
+  const firstImg = p.imgs ? Object.values(p.imgs)[0] : (p.img || '');
+
+  if (firstImg) {
+    imgEl.src                = firstImg;
+    imgEl.alt                = p.name;
+    imgEl.style.display      = '';
+    imgWrap.style.background = '';
+    imgEl.onerror = () => {
+      imgEl.style.display      = 'none';
+      imgWrap.style.background = '#e8ddd8';
+    };
+  } else {
+    imgEl.style.display      = 'none';
+    imgWrap.style.background = '#e8ddd8';
+  }
+
+  // ── Text fields ──
+  document.getElementById('modal-title').textContent   = p.name;
+  document.getElementById('modalCategory').textContent = p.category;
+  document.getElementById('modalMaterial').textContent = (p.material || []).join(', ') || '—';
+  document.getElementById('modalFit').textContent      = (p.fit      || []).join(', ') || '—';
+  document.getElementById('modalSleeve').textContent   = (p.sleeve   || []).join(', ') || '—';
+  document.getElementById('modalNeckline').textContent = (p.neckline || []).join(', ') || '—';
+  document.getElementById('modalQuality').textContent  = (p.quality  || []).join(', ') || '—';
+
+  // ── Sizes ──
+  const sizesEl = document.getElementById('modalSizes');
+  sizesEl.innerHTML = (p.size || []).length
+    ? p.size.map(s =>
+        `<button class="modal-size-chip" onclick="toggleModalSize(this)"
+                 aria-pressed="false">${s}</button>`
+      ).join('')
+    : '<span style="font-size:13px;color:var(--text-muted)">One size</span>';
+
+  // ── Colour swatches ──
+  // For products with p.imgs, clicking a swatch also swaps the modal image.
+  const coloursEl = document.getElementById('modalColours');
+  coloursEl.innerHTML = (p.colour || []).map((c, i) => {
+    const hex      = COLOUR_HEX[c] || '#ccc';
+    const border   = c === 'White' ? 'border:1.5px solid #ccc;' : '';
+    // If this product has per-colour images, wire up image swap on click
+    const swapCall = p.imgs && p.imgs[c]
+      ? `swapModalImage('${p.imgs[c]}');`
+      : '';
+    const activeClass = i === 0 ? ' active' : '';  // first colour active by default
+    return `<span class="modal-swatch${activeClass}"
+                 style="background:${hex};${border}"
+                 title="${c}" aria-label="${c}"
+                 onclick="toggleModalSwatch(this);${swapCall}"></span>`;
+  }).join('');
+
+  modal.showModal();
+  document.body.style.overflow = 'hidden';
+}
+
+// Swap the large modal image when a colour swatch is clicked
+function swapModalImage(src) {
+  const imgEl   = document.getElementById('modalImg');
+  const imgWrap = document.getElementById('modalImgWrap');
+  imgEl.style.opacity = '0';
+  setTimeout(() => {
+    imgEl.src           = src;
+    imgEl.style.display = '';
+    imgEl.style.opacity = '1';
+    imgEl.onerror = () => {
+      imgEl.style.display      = 'none';
+      imgWrap.style.background = '#e8ddd8';
+    };
+  }, 150);
+}
+
+function closeModal() {
+  const modal = document.getElementById('productModal');
+  if (!modal) return;
+  modal.close();
+  document.body.style.overflow = '';
+}
+
+function toggleModalSize(el) {
+  el.closest('#modalSizes').querySelectorAll('.modal-size-chip').forEach(c => {
+    c.classList.remove('active');
+    c.setAttribute('aria-pressed', 'false');
+  });
+  el.classList.add('active');
+  el.setAttribute('aria-pressed', 'true');
+}
+
+function toggleModalSwatch(el) {
+  el.closest('#modalColours').querySelectorAll('.modal-swatch')
+    .forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+
+// ── 9. INIT ───────────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Delegate checkbox changes to applyFilters
+
   document.querySelectorAll('.filter-panel input[type=checkbox]')
     .forEach(cb => cb.addEventListener('change', applyFilters));
 
-  // Initial render (no filters active yet)
   applyFilters();
+
+  const closeBtn = document.getElementById('modalClose');
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  const modal = document.getElementById('productModal');
+  if (modal) {
+    modal.addEventListener('click', e => {
+      const rect = modal.getBoundingClientRect();
+      if (e.clientX < rect.left || e.clientX > rect.right ||
+          e.clientY < rect.top  || e.clientY > rect.bottom) closeModal();
+    });
+    modal.addEventListener('close', () => { document.body.style.overflow = ''; });
+  }
+
+  // Smooth image swap transition
+  const modalImg = document.getElementById('modalImg');
+  if (modalImg) modalImg.style.transition = 'opacity 0.15s ease';
 });
