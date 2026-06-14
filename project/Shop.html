@@ -15,7 +15,7 @@
         <!-- navbar -->
         <div class="navbar">
             <div class="nav-logo">
-                <img src="./images/Gopi_Collection.png" alt="Gopi Collection Logo" class="header-logo">
+                <a href="Index.html"><img src="./images/Gopi_Collection.png" alt="Gopi Collection Logo" class="header-logo"></a>
             </div>
 
             <div class="nav-home border">
@@ -327,6 +327,57 @@
 <div class="shop-grid" id="shopGrid"></div>
 
 </div>    
+
+<!-- ── PRODUCT MODAL ─────────────────────────────────────────────────────── -->
+<dialog id="productModal" class="product-modal" aria-modal="true" aria-labelledby="modal-title">
+  <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+
+  <div class="modal-inner">
+    <!-- Left: large image -->
+    <div class="modal-img-wrap" id="modalImgWrap">
+      <img id="modalImg" src="" alt="" class="modal-img" />
+    </div>
+
+    <!-- Right: details -->
+    <div class="modal-details">
+      <p class="modal-category" id="modalCategory"></p>
+      <h2 class="modal-title" id="modal-title"></h2>
+
+      <div class="modal-divider"></div>
+
+      <div class="modal-meta">
+        <div class="modal-meta-row">
+          <span class="modal-meta-label">Material</span>
+          <span class="modal-meta-val" id="modalMaterial"></span>
+        </div>
+        <div class="modal-meta-row">
+          <span class="modal-meta-label">Fit</span>
+          <span class="modal-meta-val" id="modalFit"></span>
+        </div>
+        <div class="modal-meta-row">
+          <span class="modal-meta-label">Sleeve</span>
+          <span class="modal-meta-val" id="modalSleeve"></span>
+        </div>
+        <div class="modal-meta-row">
+          <span class="modal-meta-label">Neckline</span>
+          <span class="modal-meta-val" id="modalNeckline"></span>
+        </div>
+        <div class="modal-meta-row">
+          <span class="modal-meta-label">Quality</span>
+          <span class="modal-meta-val" id="modalQuality"></span>
+        </div>
+      </div>
+
+      <div class="modal-divider"></div>
+
+      <p class="modal-size-label">Available Sizes</p>
+      <div class="modal-sizes" id="modalSizes"></div>
+
+      <p class="modal-size-label" style="margin-top:16px">Available Colours</p>
+      <div class="modal-colours" id="modalColours"></div>
+    </div>
+  </div>
+</dialog>
  
     <!-- Footer -->
 
@@ -343,9 +394,9 @@
                      <b>Gopi Collection: </b>a stylish apparel store in Bhopal, Madhya Pradesh, offering trendy and comfortable clothing for all occasions and all genders. We focus on quality fabrics, modern designs, and affordable prices to help you look and feel your best.
                     </div>
                     <div class="foot-socialmedia">
-                        <a href="#">
+                        <a  href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-instagram"></i></a>
-                        <a href="#">
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-facebook-f"></i></a>
                     </div>
                 </div>
@@ -373,12 +424,16 @@
                         <div class="foot-location">
                             <i class="fa-solid fa-map-pin"></i>
                             <a href="https://maps.app.goo.gl/s568kFXDhxnz9Bgd7" target="_blank">108, near to Aims Hospital, Sector- 9/A Saket Nagar, Habib Ganj, Bhopal, Madhya Pradesh 462024</a>
+                            <i class="fa-solid fa-map-pin"></i>
+                            <a href="https://maps.app.goo.gl/eoHRq63xQ8VTfMuFA" target="_blank">LIG-39, opposite to Amarai Park, Amrai Housing Board Colony, Bagh Swaniya, Bhopal, Madhya Pradesh 462043</a>
                         </div>
                     </div>    
                 </div>
             </div>
         </div>
     </footer>
+    
 <script src="app.js"></script>
+<script src="nav-category.js"></script>
 </body>
 </html>
