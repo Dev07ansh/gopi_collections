@@ -72,13 +72,13 @@
 
   // Show / hide sidebar filter sections by category
   const filterVisibility = {
-    'sleeve':   ['T-Shirts','Casual Shirts','Formal Shirts','Sports T-shirts',
+    'sleeve':   ['T-Shirts','Kids T-Shirts','Casual Shirts','Formal Shirts','Sports T-shirts',
                  'Sweatshirts','Sweaters','Jackets','Rain Coats'],
-    'neckline': ['T-Shirts','Casual Shirts','Formal Shirts','Sports T-shirts',
+    'neckline': ['T-Shirts','Kids T-Shirts','Casual Shirts','Formal Shirts','Sports T-shirts',
                  'Sweatshirts','Sweaters'],
-    'fit':      ['T-Shirts','Casual Shirts','Formal Shirts','Sports T-shirts',
+    'fit':      ['T-Shirts','Kids T-Shirts','Casual Shirts','Formal Shirts','Sports T-shirts',
                  'Jeans','Trousers','Lowers','Track pants & Joggers'],
-    'material': ['T-Shirts','Casual Shirts','Formal Shirts','Sweatshirts',
+    'material': ['T-Shirts','Kids T-Shirts','Casual Shirts','Formal Shirts','Sweatshirts',
                  'Sweaters','Jackets','Rain Coats','Jeans','Trousers',
                  'Shorts','Lowers','Track pants & Joggers'],
   };
@@ -218,12 +218,24 @@ function applyFilters() {
     grid.innerHTML = filtered.map(p => {
       const idx = products.indexOf(p);
       // p.imgs is a colour→path object; p.img is a single path. Support both.
-      const thumbnail = p.imgs ? Object.values(p.imgs)[0] : (p.img || '');
+      // If a colour filter is active and this product has that colour's image, show it.
+      let thumbnail;
+      if (p.imgs) {
+        const matchedColour = activeColours.find(c => p.imgs[c]);
+        thumbnail = matchedColour ? p.imgs[matchedColour] : Object.values(p.imgs)[0];
+      } else {
+        thumbnail = p.img || '';
+      }
+      // Determine which colour to pre-select in modal (matched filter colour, or first)
+      const cardColour = p.imgs
+        ? (activeColours.find(c => p.imgs[c]) || Object.keys(p.imgs)[0])
+        : (activeColours.find(c => (p.colour || []).includes(c)) || (p.colour || [])[0] || '');
+      const colourArg = cardColour ? `'${cardColour}'` : 'undefined';
       return `
         <div class="p-card" role="button" tabindex="0"
              aria-label="View details for ${p.name}"
-             onclick="openModal(${idx})"
-             onkeydown="if(event.key==='Enter'||event.key===' ')openModal(${idx})">
+             onclick="openModal(${idx}, ${colourArg})"
+             onkeydown="if(event.key==='Enter'||event.key===' ')openModal(${idx}, ${colourArg})">
           <div class="p-img">
             ${thumbnail
               ? `<img src="${thumbnail}" alt="${p.name}"
@@ -243,22 +255,25 @@ function applyFilters() {
 
 const COLOUR_HEX = {
   'White':  '#ffffff', 'Black': '#222222', 'Navy':    '#5a6e8c',
-  'Red':    '#a52a1c', 'Green': '#4a7c59', 'Mustard': '#b8860b',
+  'Red':    '#be2f1f', 'Green': '#008000', 'Mustard': '#b8860b',
   'Taupe':  '#7a6e65', 'Beige': '#c0b8b0', 'Blue':    '#4a6fa5',
-  'Purple': '#880b5f', 'Grey':  '#9a9a9a', 'Pink':    '#db546b'
+  'Purple': '#880b5f', 'Grey':  '#9a9a9a', 'Pink':    '#db546b',
+  'Light Purple': '#9370db', 'Peach': '#fdac65', 'Light Blue': '#add8e6', 'Dark Green': '#006400',
 };
 
-function openModal(productIndex) {
+function openModal(productIndex, preferredColour) {
   const p     = products[productIndex];
   const modal = document.getElementById('productModal');
   if (!p || !modal) return;
 
   // ── Image ──
-  // For multi-colour products (p.imgs), show the first colour's image by default.
-  // Clicking a swatch will swap it via swapModalImage().
+  // For multi-colour products (p.imgs), show the preferred (filtered) colour's
+  // image if available, otherwise fall back to the first colour's image.
   const imgEl   = document.getElementById('modalImg');
   const imgWrap = document.getElementById('modalImgWrap');
-  const firstImg = p.imgs ? Object.values(p.imgs)[0] : (p.img || '');
+  const firstImg = p.imgs
+    ? (preferredColour && p.imgs[preferredColour] ? p.imgs[preferredColour] : Object.values(p.imgs)[0])
+    : (p.img || '');
 
   if (firstImg) {
     imgEl.src                = firstImg;
@@ -294,15 +309,19 @@ function openModal(productIndex) {
 
   // ── Colour swatches ──
   // For products with p.imgs, clicking a swatch also swaps the modal image.
+  // If a colour was pre-selected (from sidebar filter), make it active by default.
   const coloursEl = document.getElementById('modalColours');
-  coloursEl.innerHTML = (p.colour || []).map((c, i) => {
+  const defaultColour = (preferredColour && (p.colour || []).includes(preferredColour))
+    ? preferredColour
+    : (p.colour || [])[0];
+  coloursEl.innerHTML = (p.colour || []).map((c) => {
     const hex      = COLOUR_HEX[c] || '#ccc';
     const border   = c === 'White' ? 'border:1.5px solid #ccc;' : '';
     // If this product has per-colour images, wire up image swap on click
     const swapCall = p.imgs && p.imgs[c]
       ? `swapModalImage('${p.imgs[c]}');`
       : '';
-    const activeClass = i === 0 ? ' active' : '';  // first colour active by default
+    const activeClass = c === defaultColour ? ' active' : '';
     return `<span class="modal-swatch${activeClass}"
                  style="background:${hex};${border}"
                  title="${c}" aria-label="${c}"
