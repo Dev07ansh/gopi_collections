@@ -4,7 +4,7 @@ const featuredCards = [
   { img: './images/hoddies.jpg',         alt: 'Hoodies',     title: 'Hoodies & Jackets',     desc: 'Warm, stylish & comfortable', href: 'Shop.html?gender=Men&category=Sweatshirts' },
   { img: './images/blurred-frame 1.png', alt: 'Co-ords',     title: 'Co-ord Sets',           desc: 'Perfect matching outfits',    href: 'Shop.html?gender=Men&category=Co-ord Sets' },
   { img: './images/blurred-frame.png',   alt: 'Tracksuits',  title: 'Super soft Tracksuits', desc: 'Premium Comfort & Fit',       href: 'Shop.html?gender=Men&category=Track pants & Joggers' },
-  { img: './images/travel.jpg',          alt: 'Travel Wear', title: 'Travel Essentials',     desc: 'Comfort for every journey',   href: 'Shop.html?gender=Men&category=T-Shirts' },
+  { img: './images/saree.jpeg',      alt: 'Silk Saree',  title: 'Silk Saree',            desc: 'Lavender Satin Silk Saree',   href: 'Shop.html?gender=Men&category=Sarees' },
 ];
 
 const cardContainer = document.getElementById('card-container');
@@ -53,49 +53,49 @@ const products = [
 
   // ── T-Shirts ──────────────────────────────────────────────────────────────
   {
-    category: 'T-Shirts', name: 'Graphic Print Oversized Tee', img: './images/blurred-frame.png',
+    category: 'T-Shirts', name: 'Graphic Print Oversized Tee', img: '',
     colour: ['Black','White'],  size: ['S','M','L','XL'],
     fit: ['Loose Fit'],         sleeve: ['Short Sleeve'],
     material: ['Cotton'],       quality: ['Basic'],      neckline: ['Crew Neck'],
   },
   {
-    category: 'T-Shirts', name: 'Plain Classic Fit T-Shirt', img: './images/tshirt-men.png',
+    category: 'T-Shirts', name: 'Plain Classic Fit T-Shirt', img: './images/Tshirt-men/tshirt-men.png',
     colour: ['White'], size: ['XS','S','M','L','XL','XXL'],
     fit: ['Regular Fit'],             sleeve: ['Short Sleeve'],
     material: ['Cotton'],             quality: ['Premium'],  neckline: ['Crew Neck'],
   },
   {
-    category: 'T-Shirts', name: 'Acid Wash Drop Shoulder Tee', img: './images/tshirt-men-1.png',
+    category: 'T-Shirts', name: 'Acid Wash Drop Shoulder Tee', img: './images/Tshirt-men/tshirt-men-1.png',
     colour: ['Taupe','Beige'],  size: ['S','M','L'],
     fit: ['Loose Fit'],         sleeve: ['Short Sleeve'],
     material: ['Cotton'],       quality: ['Basic'],      neckline: ['Crew Neck'],
   },
   {
-    category: 'T-Shirts', name: 'Polo Collar Cotton T-Shirt', img: './images/tshirt-men-2.png',
+    category: 'T-Shirts', name: 'Polo Collar Cotton T-Shirt', img: './images/Tshirt-men/tshirt-men-2.png',
     colour: ['White'], size: ['S','M','L','XL','XXL'],
     fit: ['Regular Fit'],             sleeve: ['Short Sleeve'],
     material: ['Cotton'],             quality: ['Premium'],  neckline: ['Polo'],
   },
   {
-    category: 'T-Shirts', name: 'Striped Casual T-Shirt', img: './images/tshirt-men-3.png',
+    category: 'T-Shirts', name: 'Striped Casual T-Shirt', img: './images/Tshirt-men/tshirt-men-3.png',
     colour: ['Navy','Red','White'],  size: ['XS','S','M','L','XL'],
     fit: ['Regular Fit'],            sleeve: ['Short Sleeve'],
     material: ['Cotton'],            quality: ['Basic'],      neckline: ['Crew Neck'],
   },
   {
-    category: 'T-Shirts', name: 'Solid Crew Neck Everyday Tee', img: './images/tshirt-men-4.png',
+    category: 'T-Shirts', name: 'Solid Crew Neck Everyday Tee', img: './images/Tshirt-men/tshirt-men-4.png',
     colour: ['Black','White','Navy','Green','Mustard','Red'], size: ['XS','S','M','L','XL','XXL','3XL'],
     fit: ['Regular Fit'],                                     sleeve: ['Short Sleeve'],
     material: ['Cotton'],                                     quality: ['Basic'],       neckline: ['Crew Neck'],
   },
   {
-    category: 'T-Shirts', name: 'Printed Streetwear Tee', img: './images/tshirt-men-5.png',
+    category: 'T-Shirts', name: 'Printed Streetwear Tee', img: './images/Tshirt-ment/tshirt-men-5.png',
     colour: ['Black','White'],  size: ['S','M','L','XL'],
     fit: ['Loose Fit'],         sleeve: ['Short Sleeve'],
     material: ['Cotton'],       quality: ['Basic'],      neckline: ['Crew Neck'],
   },
   {
-    category: 'T-Shirts', name: 'V-Neck Essential T-Shirt', img: './images/tshirt-men-6.png',
+    category: 'T-Shirts', name: 'V-Neck Essential T-Shirt', img: './images/Tshirt-ment/tshirt-men-6.png',
     colour: ['White','Black','Navy'], size: ['S','M','L','XL','XXL'],
     fit: ['Slim Fit'],                sleeve: ['Short Sleeve'],
     material: ['Cotton'],             quality: ['Premium'],  neckline: ['V-Neck'],
@@ -373,51 +373,88 @@ const products = [
     material: ['Polyester'],    quality: ['Premium'],  neckline: [],
   },
   {
-    category: 'Co-ord Sets', name: 'Printed Co-ord Set', img: './images/co-ord _set_2.jpg',
+    category: 'Co-ord Sets', name: 'Printed Co-ord Set', img: './images/co-ord_set_2.jpg',
     colour: ['Mustard','Red'],  size: ['S','M','L','XL'],
     fit: ['Loose Fit'],         sleeve: ['Short Sleeve'],
     material: ['Viscose'],      quality: ['Basic'],    neckline: [],
   },
-
-  // ── Kurta Sets ────────────────────────────────────────────────────────────
   {
-    category: 'Kurta Sets', name: 'Cotton Kurta Set', imgs: {'Pink':'./images/Kala-poshak-suit.jpeg', 
-      'Red':'./images/Kala-poshak-suit1.jpeg','Green': './images/Kala-poshak-suit4.jpeg',
-      'Purple':'./images/Kala-poshak-suit5.jpeg','Blue':'./images/Kala-poshak-suit6.jpeg'},
+    category: 'Co-ord Sets', name: 'Printed Co-ord Set', img: './images/co-ord_set_3.png',
+    colour: ['White'],  size: ['S','M','L','XL'],
+    fit: ['Loose Fit'],         sleeve: ['Short Sleeve'],
+    material: ['Viscose'],      quality: ['Basic'],    neckline: [],
+  },
+
+
+  // ── Sarees ────────────────────────────────────────────────────────────
+  {
+    category: 'Sarees', name: 'Rangoli Partywear Saree', imgs: {'Purple':'./images/Sarees/Rangoli/rangoli-saree.png', 
+      'Blue':'./images/Sarees/Rangoli/rangoli-saree-2.png','Grey': './images/Sarees/Rangoli/rangoli-saree-3.png'},
+    colour: ['Purple','Blue','Grey'], size: ['-Free Size'],
+    fit: ['Regular Fit'],              sleeve: [],
+    material: ['Cotton'],              quality: ['Premium'],  neckline: [],
+  },
+
+  {
+    category: 'Sarees', name: 'Anvika Partywear Saree', imgs: {'Purple':'./images/Sarees/Anvika/anvika-saree.png', 
+      'Light Purple':'./images/Sarees/Anvika/anvika-saree-1.png','Green': './images/Sarees/Anvika/anvika-saree-2.png',
+      'Pink': './images/Sarees/Anvika/anvika-saree-3.png','Red': './images/Sarees/Anvika/anvika-saree-4.png',
+      'Blue': './images/Sarees/Anvika/anvika-saree-5.png'},
+    colour: ['Purple','Light Purple','Green','Pink','Red','Blue'], size: ['-Free Size'],
+    fit: ['Regular Fit'],              sleeve: [],
+    material: ['Cotton'],              quality: ['Premium'],  neckline: [],
+  },
+
+
+  // ── Kurta Sets and Salwar Suits ────────────────────────────────────────────────────────────
+  // Kala Poshak Kurta Set
+  {
+    category: 'Kurta Sets and Salwar Suits', name: 'Cotton Kurta Set', imgs: {'Pink':'./images/Suits/kala-poshak/Kala-poshak-suit.jpeg', 
+      'Red':'./images/Suits/kala-poshak/Kala-poshak-suit1.jpeg','Green': './images/Suits/kala-poshak/Kala-poshak-suit4.jpeg',
+      'Purple':'./images/Suits/kala-poshak/Kala-poshak-suit5.jpeg','Blue':'./images/Suits/kala-poshak/Kala-poshak-suit6.jpeg'},
     colour: ['Pink','Red','Green','Purple','Blue'],  size: ['L','XL','XXL','3XL'],
     fit: ['Regular Fit'],              sleeve: [],
     material: ['Cotton'],              quality: ['Premium'],  neckline: [],
   },
+
+  // Suryajyoti Kurta Set
   {
-    category: 'Kurta Sets', name: 'Cotton Kurta Set', img:'./images/Kala-poshak-suit1.jpeg',
-    colour: ['Red'],  size: ['L','XL','XXL','3XL'],
-    fit: ['Regular Fit'],              sleeve: [],
+    category: 'Kurta Sets and Salwar Suits', name: 'Cotton Kurta Set', imgs: {'Red':'./images/Suryajyoti-suit.png', 
+      'White':'./images/Suryajyoti-suit-2.png','Green': './images/Suryajyoti-suit-5.png',
+      'Purple':'./images/Suryajyoti-suit-6.png','Blue':'./images/Suryajyoti-suit-7.png'},
+    colour: ['Red','White','Green','Purple','Blue'],  size: ['L','XL','XXL','3XL'],
+    fit: [],              sleeve: [],
+    material: ['Cotton'],              quality: ['Premium'],  neckline: [],
+  },
+
+  // Batik Queen Kurta Set
+  {
+    category: 'Kurta Sets and Salwar Suits', name: 'Batik Queen Vol 2 Deeptex Prints Readymade Cotton Pant', imgs: {'Purple':'./images/Suits/batik-queen/batik-suit.jpeg', 
+      'Red':'./images/Suits/batik-queen/batik-suit-2.jpeg','Green': './images/Suits/batik-queen/batik-suit-5.jpeg',
+      'Peach':'./images/Suits/batik-queen/batik-suit-6.jpeg'},
+    colour: ['Purple','Red','Green','Peach'],  size: ['L','XL','XXL','3XL'],
+    fit: [],              sleeve: [],
     material: ['Cotton'],              quality: ['Premium'],  neckline: [],
   },
   {
-    category: 'Kurta Sets', name: 'Cotton Kurta Set', img:'./images/Kala-poshak-suit4.jpeg',
-    colour: ['Green'],  size: ['L','XL','XXL','3XL'],
-    fit: ['Regular Fit'],              sleeve: [],
+    category: 'Kurta Sets and Salwar Suits', name: 'Batik Queen Vol 2 Deeptex Prints Readymade Cotton Pant', 
+    imgs: {'Green':'./images/Suits/batik-queen/batik-suit-3.jpeg', 'Black':'./images/Suits/batik-queen/batik-suit-4.jpeg',
+      'Blue': './images/Suits/batik-queen/batik-suit-7.jpeg','Navy':'./images/Suits/batik-queen/batik-suit-8.jpeg'},
+    colour: ['Green','Black','Blue','Navy'],  size: ['L','XL','XXL','3XL'],
+    fit: [],              sleeve: [],
     material: ['Cotton'],              quality: ['Premium'],  neckline: [],
   },
+
+
+
+ // ── Kids Collection ────────────────────────────────────────────────────────────
   {
-    category: 'Kurta Sets', name: 'Cotton Kurta Set', img: './images/Kala-poshak-suit5.jpeg',
-    colour: ['Purple'],  size: ['L','XL','XXL','3XL'],
-    fit: ['Regular Fit'],              sleeve: [],
+    category: 'Kids T-Shirts', name: 'Printed Cotton Casual tshirts with Denim Cargo shorts', 
+    imgs: {'Peach and Light Blue':'./images/gokidz-tshirt.jpeg', 'Red and Brown':'./images/gokidz-tshirt-2.jpeg',
+      'Blue': './images/gokidz-tshirt-3.jpeg', 'Navy':'./images/gokidz-tshirt-4.jpeg',
+      'Navy':'./images/gokidz-tshirt-5.jpeg','Navy':'./images/gokidz-tshirt-6.jpeg'},
+    colour: ['Peach and Light Blue','Red and Brown','Blue','Navy'],  size: ['S','M','L','XL'],
+    fit: [],              sleeve: [],
     material: ['Cotton'],              quality: ['Premium'],  neckline: [],
   },
-  {
-    category: 'Kurta Sets', name: 'Cotton Kurta Set', img: './images/Kala-poshak-suit6.jpeg',
-    colour: ['Blue'],  size: ['L','XL','XXL','3XL'],
-    fit: ['Regular Fit'],              sleeve: [],
-    material: ['Cotton'],              quality: ['Premium'],  neckline: [],
-  },
-  {
-    category: 'Kurta Sets', name: 'Cotton Kurta Set', imgs: {'Pink':'./images/Suryajyoti-suit.png', 
-      'Red':'./images/Kala-poshak-suit1.jpeg','Green': './images/Kala-poshak-suit4.jpeg',
-      'Purple':'./images/Kala-poshak-suit5.jpeg','Blue':'./images/Kala-poshak-suit6.jpeg'},
-    colour: ['Red','Red','Green','Purple','Blue'],  size: ['L','XL','XXL','3XL'],
-    fit: ['Regular Fit'],              sleeve: [],
-    material: ['Cotton'],              quality: ['Premium'],  neckline: [],
-  }
 ];
