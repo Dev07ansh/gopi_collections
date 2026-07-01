@@ -149,10 +149,112 @@
 
     </header>
 
-    <div class="contact">
-        <h1>Contact</h1>
-        <a href="Index.html">Home  </a><span> •<span> Contact</p>
+    <div class="topbar">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="Index.html">Home</a>
+      <span class="arrow">•</span>
+      <span class="current">Contact</span>
     </div>
+
+    <!-- Title -->
+    <div class="header-row">
+      <div class="title-block">
+        <h1>Contact Us</h1>
+      </div>
+    </div>
+
+    </div>
+
+    <!-- Contact form -->
+    <section class="contact-form-section">
+      <div class="contact-form-card">
+        <h2 class="contact-form-title">Send us a Message</h2>
+
+        <form id="contactForm" class="contact-form">
+          <!-- Web3Forms delivers this straight to gopi.collection2018@gmail.com -->
+          <input type="hidden" name="access_key" value="a23d32bf-d9c2-46da-91a1-15066bbc0c1d">
+          <input type="hidden" name="subject" value="New message from Gopi Collection website">
+          <input type="hidden" name="from_name" value="Gopi Collection Website">
+          <!-- honeypot: keeps bots from spamming the form -->
+          <input type="checkbox" name="botcheck" class="hidden-field" style="display:none">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cf-name">Name <span class="required">*</span></label>
+              <input type="text" id="cf-name" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <label for="cf-email">Email <span class="required">*</span></label>
+              <input type="email" id="cf-email" name="email" placeholder="Your Email" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cf-address">Address</label>
+              <input type="text" id="cf-address" name="address" placeholder="Your Address">
+            </div>
+            <div class="form-group">
+              <label for="cf-phone">Phone</label>
+              <input type="tel" id="cf-phone" name="phone" placeholder="Your Phone">
+            </div>
+          </div>
+
+          <div class="form-group form-group-full">
+            <label for="cf-subject">Subject</label>
+            <input type="text" id="cf-subject" name="user_subject" placeholder="Subject">
+          </div>
+
+          <div class="form-group form-group-full">
+            <label for="cf-message">Message <span class="required">*</span></label>
+            <textarea id="cf-message" name="message" placeholder="Your Message" rows="6" required></textarea>
+          </div>
+
+          <div class="form-agree">
+            <input type="checkbox" id="cf-agree" required>
+            <label for="cf-agree">I agree to the Terms and Privacy Policy <span class="required">*</span></label>
+          </div>
+
+          <button type="submit" class="contact-submit-btn" id="cfSubmitBtn">Send</button>
+
+          <div class="form-status" id="cfStatus" role="status"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Store locations -->
+    <section class="map-section">
+      <div class="article-header">
+        <span class="article-rule"></span>
+        <h2 class="article-title">Find Us on Google Maps</h2>
+        <span class="article-rule"></span>
+      </div>
+      <p class="map-section-subtitle">Visit us at either of our two Gopi Collection stores in Bhopal — tap a map to get directions.</p>
+
+      <div class="map-grid">
+        <div class="map-card">
+          <div class="map-card-info">
+            <h3 class="map-card-title">Saket Nagar, Habib Ganj</h3>
+            <p class="map-card-address">108, near to Aims Hospital, Sector- 9/A Saket Nagar, Habib Ganj, Bhopal, Madhya Pradesh 462024</p>
+          </div>
+          <div class="map-frame-wrap">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.9212599323505!2d77.45042817573184!3d23.20954000932445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c4360d9a181d1%3A0xfca14b8670ca91bb!2sGopi%20Collection%2C%20Bhopal!5e0!3m2!1sen!2sin!4v1782887446551!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+
+        <div class="map-card">
+          <div class="map-card-info">
+            <h3 class="map-card-title">Bagh Swaniya, Amrai Colony</h3>
+            <p class="map-card-address">LIG-39, opposite to Amarai Park, Amrai Housing Board Colony, Bagh Swaniya, Bhopal, Madhya Pradesh 462043</p>
+          </div>
+          <div class="map-frame-wrap">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.199959905324!2d77.45834197573163!3d23.19938230970616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c4344b81d8ac9%3A0xe35d06d093217329!2sGopi%20Collection!5e0!3m2!1sen!2sin!4v1782887515509!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer>
         <div class="foot-panel1">
@@ -210,5 +312,7 @@
     </footer>   
 <script src="app.js"></script>
 <script src="nav-category.js"></script>
+<script src="search.js"></script>
+<script src="contact-form.js"></script>
 </body>
 </html>

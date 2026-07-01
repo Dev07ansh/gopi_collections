@@ -37,9 +37,49 @@
 // ── 4. BREADCRUMB + TITLE + FILTER SECTION VISIBILITY ────────────────────────
 
 (function updateShopPage() {
+  if (!document.getElementById('shopGrid')) return; // only run on Shop.html
+
   const params   = new URLSearchParams(window.location.search);
   const gender   = params.get('gender')   || 'Men';
   const category = params.get('category') || 'T-Shirts';
+  const searchQ  = params.get('search');
+
+  if (searchQ) {
+    // ── Search-results mode ──────────────────────────────────────────────
+    const breadcrumbCurrent = document.querySelector('.breadcrumb .current');
+    if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'Search';
+
+    const breadcrumb = document.querySelector('.breadcrumb');
+    if (breadcrumb) {
+      breadcrumb.querySelector('.current-category')?.remove();
+      breadcrumb.querySelector('.arrow-cat')?.remove();
+
+      const arrow = document.createElement('span');
+      arrow.className   = 'arrow arrow-cat';
+      arrow.textContent = '•';
+
+      const cat = document.createElement('span');
+      cat.className   = 'current current-category';
+      cat.textContent = '"' + searchQ + '"';
+
+      breadcrumb.appendChild(arrow);
+      breadcrumb.appendChild(cat);
+    }
+
+    const h1 = document.querySelector('.title-block h1');
+    if (h1) h1.textContent = 'Search results for "' + searchQ + '"';
+
+    document.title = 'Search: ' + searchQ + ' — Gopi Collections';
+
+    // Hide every category-specific filter section in search mode (results
+    // can span multiple categories with different attribute sets)
+    ['sleeve', 'neckline', 'fit', 'material'].forEach(suffix => {
+      const item = document.getElementById('item-' + suffix);
+      if (item) item.style.display = 'none';
+    });
+
+    return; // skip the category-page-specific logic below
+  }
 
   // Breadcrumb gender segment
   const breadcrumbCurrent = document.querySelector('.breadcrumb .current');
@@ -147,6 +187,7 @@ function applyFilters() {
 
   const params   = new URLSearchParams(window.location.search);
   const category = params.get('category') || 'T-Shirts';
+  const searchQ  = (params.get('search') || '').trim().toLowerCase();
 
   // ── Collect active selections ──────────────────────────────────────────────
 
@@ -177,8 +218,15 @@ function applyFilters() {
   // ── Filter products ────────────────────────────────────────────────────────
 
   const filtered = products.filter(p => {
-    // Must match current page category
-    if (p.category !== category) return false;
+    // Free-text search mode (?search=...) ignores the page category and
+    // matches against product name + category instead.
+    if (searchQ) {
+      const haystack = (p.name + ' ' + p.category).toLowerCase();
+      if (!haystack.includes(searchQ)) return false;
+    } else {
+      // Must match current page category
+      if (p.category !== category) return false;
+    }
 
     // Colour filter  (OR within, skip if nothing selected)
     if (activeColours.length > 0) {
@@ -396,4 +444,69 @@ document.addEventListener('DOMContentLoaded', function() {
   // Smooth image swap transition
   const modalImg = document.getElementById('modalImg');
   if (modalImg) modalImg.style.transition = 'opacity 0.15s ease';
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  contact-form.js  —  Gopi Collections
+//  Submits the "Send A Message" form on Contact.html to Web3Forms, which
+//  emails the submission straight to gopi.collection2018@gmail.com. No
+//  backend/server required — this is a plain client-side POST.
+//
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const status        = document.getElementById('cfStatus');
+  const btn           = document.getElementById('cfSubmitBtn');
+  const subjectInput  = document.getElementById('cf-subject');
+  const subjectHidden = form.querySelector('input[name="subject"]');
+  const accessKey     = form.querySelector('input[name="access_key"]').value;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!accessKey || accessKey.indexOf('PASTE_YOUR') === 0) {
+      setStatus('Form isn\'t connected yet — add a Web3Forms access key in Contact.html.', 'error');
+      return;
+    }
+
+    // Fold the user's own Subject field into the email subject line
+    if (subjectHidden) {
+      const userSubject = (subjectInput.value || '').trim();
+      subjectHidden.value = userSubject
+        ? `Website Contact — ${userSubject}`
+        : 'New message from Gopi Collection website';
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    setStatus('', '');
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus('Thank you! Your message has been sent — we\'ll get back to you soon.', 'success');
+        form.reset();
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      setStatus('Sorry, something went wrong. Please try again or call us directly.', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send';
+    }
+  });
+
+  function setStatus(message, type) {
+    status.textContent = message;
+    status.className = 'form-status' + (type ? ' ' + type : '');
+  }
 });
