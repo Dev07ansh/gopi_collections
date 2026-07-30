@@ -15,11 +15,13 @@
 
   document.querySelectorAll(
     '.mens-dropdown a, .womens-dropdown a, .kids-dropdown a'
-  ).forEach(function(link) {
+  ).forEach(function (link) {
     const text = link.textContent.trim();
     if (!text) return;
 
-    const parent = link.closest('.mens-dropdown, .womens-dropdown, .kids-dropdown');
+    const parent = link.closest(
+      '.mens-dropdown, .womens-dropdown, .kids-dropdown'
+    );
     if (!parent) return;
 
     let gender = 'Men';
@@ -34,93 +36,61 @@
 })();
 
 
-// ── 4. BREADCRUMB + TITLE + FILTER SECTION VISIBILITY ────────────────────────
-
+/* 2. Read URL params and update Shop page */
 (function updateShopPage() {
-  if (!document.getElementById('shopGrid')) return; // only run on Shop.html
 
   const params   = new URLSearchParams(window.location.search);
   const gender   = params.get('gender')   || 'Men';
   const category = params.get('category') || 'T-Shirts';
-  const searchQ  = params.get('search');
 
-  if (searchQ) {
-    // ── Search-results mode ──────────────────────────────────────────────
-    const breadcrumbCurrent = document.querySelector('.breadcrumb .current');
-    if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'Search';
-
-    const breadcrumb = document.querySelector('.breadcrumb');
-    if (breadcrumb) {
-      breadcrumb.querySelector('.current-category')?.remove();
-      breadcrumb.querySelector('.arrow-cat')?.remove();
-
-      const arrow = document.createElement('span');
-      arrow.className   = 'arrow arrow-cat';
-      arrow.textContent = '•';
-
-      const cat = document.createElement('span');
-      cat.className   = 'current current-category';
-      cat.textContent = '"' + searchQ + '"';
-
-      breadcrumb.appendChild(arrow);
-      breadcrumb.appendChild(cat);
-    }
-
-    const h1 = document.querySelector('.title-block h1');
-    if (h1) h1.textContent = 'Search results for "' + searchQ + '"';
-
-    document.title = 'Search: ' + searchQ + ' — Gopi Collections';
-
-    // Hide every category-specific filter section in search mode (results
-    // can span multiple categories with different attribute sets)
-    ['sleeve', 'neckline', 'fit', 'material'].forEach(suffix => {
-      const item = document.getElementById('item-' + suffix);
-      if (item) item.style.display = 'none';
-    });
-
-    return; // skip the category-page-specific logic below
+  /*  Breadcrumb  */
+  // <a href="…">Home</a> • <span class="current">Men</span>
+  const breadcrumbCurrent = document.querySelector('.breadcrumb .current');
+  if (breadcrumbCurrent) {
+    breadcrumbCurrent.textContent = gender;
   }
 
-  // Breadcrumb gender segment
-  const breadcrumbCurrent = document.querySelector('.breadcrumb .current');
-  if (breadcrumbCurrent) breadcrumbCurrent.textContent = gender;
-
-  // Breadcrumb category segment (append once)
+  // Add a second breadcrumb segment for the category if not already there
   const breadcrumb = document.querySelector('.breadcrumb');
   if (breadcrumb) {
-    breadcrumb.querySelector('.current-category')?.remove();
-    breadcrumb.querySelector('.arrow-cat')?.remove();
+    // Remove any existing category segment we added before
+    const existing = breadcrumb.querySelector('.current-category');
+    if (existing) existing.remove();
+    const existingArrow = breadcrumb.querySelector('.arrow-cat');
+    if (existingArrow) existingArrow.remove();
 
     const arrow = document.createElement('span');
-    arrow.className   = 'arrow arrow-cat';
+    arrow.className = 'arrow arrow-cat';
     arrow.textContent = '•';
 
     const cat = document.createElement('span');
-    cat.className   = 'current current-category';
+    cat.className = 'current current-category';
     cat.textContent = category;
 
     breadcrumb.appendChild(arrow);
     breadcrumb.appendChild(cat);
   }
 
-  // Page h1
+  /*  Page title (h1)  */
   const h1 = document.querySelector('.title-block h1');
   if (h1) h1.textContent = category;
 
-  // Browser tab
+  /*  Document <title>  */
   document.title = category + ' — Gopi Collections';
 
-  // Show / hide sidebar filter sections by category
+  /*  Show / hide sidebar filter sections  */
+  // Filters that are only relevant for certain categories
   const filterVisibility = {
-    'sleeve':   ['T-Shirts','Kids T-Shirts','Casual Shirts','Formal Shirts','Sports T-shirts',
-                 'Sweatshirts','Sweaters','Jackets','Rain Coats'],
-    'neckline': ['T-Shirts','Kids T-Shirts','Casual Shirts','Formal Shirts','Sports T-shirts',
-                 'Sweatshirts','Sweaters'],
-    'fit':      ['T-Shirts','Kids T-Shirts','Casual Shirts','Formal Shirts','Sports T-shirts',
-                 'Jeans','Trousers','Lowers','Track pants & Joggers'],
-    'material': ['T-Shirts','Kids T-Shirts','Casual Shirts','Formal Shirts','Sweatshirts',
-                 'Sweaters','Jackets','Rain Coats','Jeans','Trousers',
-                 'Shorts','Lowers','Track pants & Joggers'],
+    // key = filter panel id suffix,  value = array of categories that show it
+    'sleeve':   ['T-Shirts', 'Casual Shirts', 'Formal Shirts', 'Sports T-shirts',
+                 'Sweatshirts', 'Sweaters', 'Jackets', 'Rain Coats'],
+    'neckline': ['T-Shirts', 'Casual Shirts', 'Formal Shirts', 'Sports T-shirts',
+                 'Sweatshirts', 'Sweaters'],
+    'fit':      ['T-Shirts', 'Casual Shirts', 'Formal Shirts', 'Sports T-shirts',
+                 'Jeans', 'Trousers', 'Lowers', 'Track pants & Joggers'],
+    'material': ['T-Shirts', 'Casual Shirts', 'Formal Shirts', 'Sweatshirts',
+                 'Sweaters', 'Jackets', 'Rain Coats', 'Jeans', 'Trousers',
+                 'Shorts', 'Lowers', 'Track pants & Joggers'],
   };
 
   for (const [suffix, validCategories] of Object.entries(filterVisibility)) {
@@ -129,384 +99,72 @@
     item.style.display = validCategories.includes(category) ? '' : 'none';
   }
 
-  // Highlight active nav link
-  document.querySelectorAll('.mens-dropdown a, .womens-dropdown a, .kids-dropdown a')
-    .forEach(function(link) {
-      try {
-        const url  = new URL(link.href, window.location.href);
-        const lCat = url.searchParams.get('category');
-        const lGen = url.searchParams.get('gender');
-        link.style.fontWeight = (lCat === category && lGen === gender) ? '700' : '';
-      } catch(e) {}
-    });
+  /*  Highlight active nav link  */
+  document.querySelectorAll(
+    '.mens-dropdown a, .womens-dropdown a, .kids-dropdown a'
+  ).forEach(function (link) {
+    const url = new URL(link.href, window.location.href);
+    const lCat = url.searchParams.get('category');
+    const lGen = url.searchParams.get('gender');
+    if (lCat === category && lGen === gender) {
+      link.style.fontWeight = '700';
+      //  link.style.color = '#e63946';  matches your pink/red brand colour
+    }
+  });
+
 })();
 
 
-// ── 6. SIDEBAR INTERACTIVE HELPERS ───────────────────────────────────────────
-
-// Accordion open/close
-function toggleFilter(id) {
-  const item = document.getElementById('item-' + id);
-  if (item) item.classList.toggle('open');
+/* 3. Existing sidebar toggle helpers (keep these) */
+function toggleFilter(name) {
+  const panel = document.getElementById('panel-' + name);
+  const arrow = document.querySelector('#item-' + name + ' .arrow');
+  if (!panel) return;
+  const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+  panel.style.maxHeight  = isOpen ? '0px'   : panel.scrollHeight + 'px';
+  panel.style.overflow   = 'hidden';
+  if (arrow) arrow.textContent = isOpen ? '→' : '↓';
 }
 
-// Colour swatch toggle  →  calls applyFilters() after
 function toggleSwatch(el) {
   el.classList.toggle('active');
-  applyFilters();
 }
 
-// Size chip toggle  →  calls applyFilters() after
 function toggleChip(el) {
   el.classList.toggle('active');
-  applyFilters();
 }
 
-// Checkbox change  →  calls applyFilters() after
-// (wired via event delegation below — no inline onclick needed)
-
-// Clear all sidebar selections
 function clearAll() {
   document.querySelectorAll('.filter-option input[type=checkbox]')
-    .forEach(cb => { cb.checked = false; });
+    .forEach(cb => cb.checked = false);
   document.querySelectorAll('.size-chip, .colour-swatch')
     .forEach(el => el.classList.remove('active'));
-  applyFilters();
 }
 
+// Card section in Shop page (static for now, will make dynamic later)
 
-// ── 7. CORE FILTER ENGINE ─────────────────────────────────────────────────────
-//
-//  Reads every active selection from the sidebar and re-renders the grid.
-//  Each active filter type is ANDed together.
-//  Within one filter type, multiple selections are ORed (e.g. Black OR Navy).
+const products = [
+  { name: "Graphic Print Oversized Tee" ,img: './images/blurred-frame.png'},
+  { name: "Plain Classic Fit T-Shirt"},
+  { name: "Plain Classic Fit T-Shirt"},
+  { name: "Acid Wash Drop Shoulder Tee"},
+  { name: "Polo Collar Cotton T-Shirt"},
+  { name: "Striped Casual T-Shirt"},
+  { name: "Solid Crew Neck Everyday Tee"},
+  { name: "Printed Streetwear Tee"},
+  { name: "V-Neck Essential T-Shirt"},
+];
 
-function applyFilters() {
-  const grid = document.getElementById('shopGrid');
-  if (!grid) return;
-
-  const params   = new URLSearchParams(window.location.search);
-  const category = params.get('category') || 'T-Shirts';
-  const searchQ  = (params.get('search') || '').trim().toLowerCase();
-
-  // ── Collect active selections ──────────────────────────────────────────────
-
-  // Colours: read `title` attribute of active swatches
-  const activeColours = [...document.querySelectorAll('.colour-swatch.active')]
-    .map(el => el.getAttribute('title'))
-    .filter(Boolean);
-
-  // Sizes: read text content of active size chips
-  const activeSizes = [...document.querySelectorAll('.size-chip.active')]
-    .map(el => el.textContent.trim())
-    .filter(Boolean);
-
-  // Checkboxes: group by their filter panel parent
-  // panel id = "panel-fit", "panel-sleeve", etc.  →  key = "fit", "sleeve"
-  const checkboxGroups = {};
-  document.querySelectorAll('.filter-panel input[type=checkbox]:checked')
-    .forEach(cb => {
-      // Walk up to find the panel id
-      const panel = cb.closest('.filter-panel');
-      if (!panel) return;
-      const key = panel.id.replace('panel-', '');   // e.g. "fit", "sleeve"
-      const val = cb.parentElement.textContent.trim();
-      if (!checkboxGroups[key]) checkboxGroups[key] = [];
-      checkboxGroups[key].push(val);
-    });
-
-  // ── Filter products ────────────────────────────────────────────────────────
-
-  const filtered = products.filter(p => {
-    // Free-text search mode (?search=...) ignores the page category and
-    // matches against product name + category instead.
-    if (searchQ) {
-      const haystack = (p.name + ' ' + p.category).toLowerCase();
-      if (!haystack.includes(searchQ)) return false;
-    } else {
-      // Must match current page category
-      if (p.category !== category) return false;
-    }
-
-    // Colour filter  (OR within, skip if nothing selected)
-    if (activeColours.length > 0) {
-      const match = activeColours.some(c => p.colour.includes(c));
-      if (!match) return false;
-    }
-
-    // Size filter
-    if (activeSizes.length > 0) {
-      const match = activeSizes.some(s => p.size.includes(s));
-      if (!match) return false;
-    }
-
-    // Checkbox filters (fit, sleeve, material, quality, neckline)
-    for (const [key, selected] of Object.entries(checkboxGroups)) {
-      if (selected.length === 0) continue;
-      const productValues = p[key] || [];
-      const match = selected.some(v => productValues.includes(v));
-      if (!match) return false;
-    }
-
-    return true;
-  });
-
-  // ── Update item count ──────────────────────────────────────────────────────
-  const countEl = document.querySelector('.title-block .count');
-  if (countEl) countEl.textContent = filtered.length + ' items';
-
-  // ── Render ─────────────────────────────────────────────────────────────────
-  if (filtered.length === 0) {
-    grid.innerHTML = `
-      <div class="no-results">
-        No products match the selected filters.<br>
-        <button onclick="clearAll()" style="margin-top:12px;padding:8px 20px;cursor:pointer;">Clear Filters</button>
-      </div>`;
-  } else {
-    grid.innerHTML = filtered.map(p => {
-      const idx = products.indexOf(p);
-      // p.imgs is a colour→path object; p.img is a single path. Support both.
-      // If a colour filter is active and this product has that colour's image, show it.
-      let thumbnail;
-      if (p.imgs) {
-        const matchedColour = activeColours.find(c => p.imgs[c]);
-        thumbnail = matchedColour ? p.imgs[matchedColour] : Object.values(p.imgs)[0];
-      } else {
-        thumbnail = p.img || '';
-      }
-      // Determine which colour to pre-select in modal (matched filter colour, or first)
-      const cardColour = p.imgs
-        ? (activeColours.find(c => p.imgs[c]) || Object.keys(p.imgs)[0])
-        : (activeColours.find(c => (p.colour || []).includes(c)) || (p.colour || [])[0] || '');
-      const colourArg = cardColour ? `'${cardColour}'` : 'undefined';
-      return `
-        <div class="p-card" role="button" tabindex="0"
-             aria-label="View details for ${p.name}"
-             onclick="openModal(${idx}, ${colourArg})"
-             onkeydown="if(event.key==='Enter'||event.key===' ')openModal(${idx}, ${colourArg})">
-          <div class="p-img">
-            ${thumbnail
-              ? `<img src="${thumbnail}" alt="${p.name}"
-                      onerror="this.closest('.p-img').style.background='#e8ddd8';this.remove()">`
-              : ''}
-          </div>
-          <div class="p-info">
-            <p class="p-name">${p.name}</p>
-          </div>
-        </div>`;
-    }).join('');
-  }
+const grid = document.getElementById('shopGrid');
+if (grid) {
+  grid.innerHTML = products.map(p => `
+      <div class="p-card">
+        <div class="p-img">
+          <img src="${p.img}" alt="${p.name}">
+        </div>
+        <div class="p-info">
+          <p class="p-name">${p.name}</p>
+        </div>
+      </div>
+  `).join('');
 }
-
-
-// ── 8. MODAL ──────────────────────────────────────────────────────────────────
-
-const COLOUR_HEX = {
-  'White':  '#ffffff', 'Black': '#222222', 'Navy':    '#5a6e8c',
-  'Red':    '#be2f1f', 'Green': '#008000', 'Mustard': '#b8860b',
-  'Taupe':  '#7a6e65', 'Beige': '#c0b8b0', 'Blue':    '#4a6fa5',
-  'Purple': '#880b5f', 'Grey':  '#9a9a9a', 'Pink':    '#db546b',
-  'Light Purple': '#9370db', 'Peach': '#fdac65', 'Light Blue': '#add8e6', 'Dark Green': '#006400',
-};
-
-function openModal(productIndex, preferredColour) {
-  const p     = products[productIndex];
-  const modal = document.getElementById('productModal');
-  if (!p || !modal) return;
-
-  // ── Image ──
-  // For multi-colour products (p.imgs), show the preferred (filtered) colour's
-  // image if available, otherwise fall back to the first colour's image.
-  const imgEl   = document.getElementById('modalImg');
-  const imgWrap = document.getElementById('modalImgWrap');
-  const firstImg = p.imgs
-    ? (preferredColour && p.imgs[preferredColour] ? p.imgs[preferredColour] : Object.values(p.imgs)[0])
-    : (p.img || '');
-
-  if (firstImg) {
-    imgEl.src                = firstImg;
-    imgEl.alt                = p.name;
-    imgEl.style.display      = '';
-    imgWrap.style.background = '';
-    imgEl.onerror = () => {
-      imgEl.style.display      = 'none';
-      imgWrap.style.background = '#e8ddd8';
-    };
-  } else {
-    imgEl.style.display      = 'none';
-    imgWrap.style.background = '#e8ddd8';
-  }
-
-  // ── Text fields ──
-  document.getElementById('modal-title').textContent   = p.name;
-  document.getElementById('modalCategory').textContent = p.category;
-  document.getElementById('modalMaterial').textContent = (p.material || []).join(', ') || '—';
-  document.getElementById('modalFit').textContent      = (p.fit      || []).join(', ') || '—';
-  document.getElementById('modalSleeve').textContent   = (p.sleeve   || []).join(', ') || '—';
-  document.getElementById('modalNeckline').textContent = (p.neckline || []).join(', ') || '—';
-  document.getElementById('modalQuality').textContent  = (p.quality  || []).join(', ') || '—';
-
-  // ── Sizes ──
-  const sizesEl = document.getElementById('modalSizes');
-  sizesEl.innerHTML = (p.size || []).length
-    ? p.size.map(s =>
-        `<button class="modal-size-chip" onclick="toggleModalSize(this)"
-                 aria-pressed="false">${s}</button>`
-      ).join('')
-    : '<span style="font-size:13px;color:var(--text-muted)">One size</span>';
-
-  // ── Colour swatches ──
-  // For products with p.imgs, clicking a swatch also swaps the modal image.
-  // If a colour was pre-selected (from sidebar filter), make it active by default.
-  const coloursEl = document.getElementById('modalColours');
-  const defaultColour = (preferredColour && (p.colour || []).includes(preferredColour))
-    ? preferredColour
-    : (p.colour || [])[0];
-  coloursEl.innerHTML = (p.colour || []).map((c) => {
-    const hex      = COLOUR_HEX[c] || '#ccc';
-    const border   = c === 'White' ? 'border:1.5px solid #ccc;' : '';
-    // If this product has per-colour images, wire up image swap on click
-    const swapCall = p.imgs && p.imgs[c]
-      ? `swapModalImage('${p.imgs[c]}');`
-      : '';
-    const activeClass = c === defaultColour ? ' active' : '';
-    return `<span class="modal-swatch${activeClass}"
-                 style="background:${hex};${border}"
-                 title="${c}" aria-label="${c}"
-                 onclick="toggleModalSwatch(this);${swapCall}"></span>`;
-  }).join('');
-
-  modal.showModal();
-  document.body.style.overflow = 'hidden';
-}
-
-// Swap the large modal image when a colour swatch is clicked
-function swapModalImage(src) {
-  const imgEl   = document.getElementById('modalImg');
-  const imgWrap = document.getElementById('modalImgWrap');
-  imgEl.style.opacity = '0';
-  setTimeout(() => {
-    imgEl.src           = src;
-    imgEl.style.display = '';
-    imgEl.style.opacity = '1';
-    imgEl.onerror = () => {
-      imgEl.style.display      = 'none';
-      imgWrap.style.background = '#e8ddd8';
-    };
-  }, 150);
-}
-
-function closeModal() {
-  const modal = document.getElementById('productModal');
-  if (!modal) return;
-  modal.close();
-  document.body.style.overflow = '';
-}
-
-function toggleModalSize(el) {
-  el.closest('#modalSizes').querySelectorAll('.modal-size-chip').forEach(c => {
-    c.classList.remove('active');
-    c.setAttribute('aria-pressed', 'false');
-  });
-  el.classList.add('active');
-  el.setAttribute('aria-pressed', 'true');
-}
-
-function toggleModalSwatch(el) {
-  el.closest('#modalColours').querySelectorAll('.modal-swatch')
-    .forEach(s => s.classList.remove('active'));
-  el.classList.add('active');
-}
-
-
-// ── 9. INIT ───────────────────────────────────────────────────────────────────
-
-document.addEventListener('DOMContentLoaded', function() {
-
-  document.querySelectorAll('.filter-panel input[type=checkbox]')
-    .forEach(cb => cb.addEventListener('change', applyFilters));
-
-  applyFilters();
-
-  const closeBtn = document.getElementById('modalClose');
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-
-  const modal = document.getElementById('productModal');
-  if (modal) {
-    modal.addEventListener('click', e => {
-      const rect = modal.getBoundingClientRect();
-      if (e.clientX < rect.left || e.clientX > rect.right ||
-          e.clientY < rect.top  || e.clientY > rect.bottom) closeModal();
-    });
-    modal.addEventListener('close', () => { document.body.style.overflow = ''; });
-  }
-
-  // Smooth image swap transition
-  const modalImg = document.getElementById('modalImg');
-  if (modalImg) modalImg.style.transition = 'opacity 0.15s ease';
-});
-
-// ─────────────────────────────────────────────────────────────────────────────
-//  contact-form.js  —  Gopi Collections
-//  Submits the "Send A Message" form on Contact.html to Web3Forms, which
-//  emails the submission straight to gopi.collection2018@gmail.com. No
-//  backend/server required — this is a plain client-side POST.
-//
-
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
-
-  const status        = document.getElementById('cfStatus');
-  const btn           = document.getElementById('cfSubmitBtn');
-  const subjectInput  = document.getElementById('cf-subject');
-  const subjectHidden = form.querySelector('input[name="subject"]');
-  const accessKey     = form.querySelector('input[name="access_key"]').value;
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    if (!accessKey || accessKey.indexOf('PASTE_YOUR') === 0) {
-      setStatus('Form isn\'t connected yet — add a Web3Forms access key in Contact.html.', 'error');
-      return;
-    }
-
-    // Fold the user's own Subject field into the email subject line
-    if (subjectHidden) {
-      const userSubject = (subjectInput.value || '').trim();
-      subjectHidden.value = userSubject
-        ? `Website Contact — ${userSubject}`
-        : 'New message from Gopi Collection website';
-    }
-
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-    setStatus('', '');
-
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form),
-      });
-      const data = await res.json();
-
-      if (data.success) {
-        setStatus('Thank you! Your message has been sent — we\'ll get back to you soon.', 'success');
-        form.reset();
-      } else {
-        throw new Error(data.message || 'Submission failed');
-      }
-    } catch (err) {
-      setStatus('Sorry, something went wrong. Please try again or call us directly.', 'error');
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Send';
-    }
-  });
-
-  function setStatus(message, type) {
-    status.textContent = message;
-    status.className = 'form-status' + (type ? ' ' + type : '');
-  }
-});
